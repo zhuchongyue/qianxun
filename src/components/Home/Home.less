@@ -1,0 +1,224 @@
+@import "../common";
+
+.home {
+	&-banner {
+		img {
+			width: 100%;
+			display: block;
+		}
+	}
+
+	&-nav {
+		display: flex;
+		background-color: #edece8;
+		&-indep {
+			padding: 50 * @px;
+			text-align: center;
+		}
+
+		&-other {
+			flex: 1;
+			display: flex;
+			flex-wrap: wrap;
+
+			&-wrap {
+				display: flex;
+				width: 100%;
+
+
+				justify-content: center;
+				align-items: center;
+			}
+
+
+			&-item {
+				flex: 1;
+				text-align: center;
+				height: 100 * @px;
+				position: relative;
+
+
+				p {
+					font-size: 24 * @px;
+  					color: rgb( 102, 102, 102 );
+  					position: absolute;
+  					bottom: 0;
+  					text-align: center;
+  					width: 100%;
+				}
+
+				img.fruit {
+					width: 60 * @px;
+					margin-top: 16 * @px;
+				}
+
+				img.meat {
+					width: 60 * @px;
+				}
+
+				img.vegetable {
+					width: 60 * @px;
+				}
+
+				img.sea {
+					width: 60 * @px;
+					margin-top: 5 * @px;
+				}
+
+				img.handmade {
+					width: 60 * @px;
+				}
+
+				img.all {
+					width: 58 * @px;
+				}
+			}
+		}
+	}
+
+	&-list {
+
+		padding-bottom: 103 * @px;
+		&-word {
+			padding-top: 20 * @px;
+			text-align: center;
+			p{
+				border-top: 1px solid #ddd;
+				position: relative;
+				left: 0;
+				top: 24 * @px;
+				width: 100%;
+			}
+			span {
+				position: relative;
+				font-size: 40 * @px;
+				color: rgb( 186, 186, 186 );
+				background-color: #fff;
+				padding: 0 20 * @px;
+			}
+		}
+
+		&-content {
+			padding:20 * @px 30 * @px;
+			
+			&-item {
+				display: flex;
+				padding: 20 * @px 0;
+				border-bottom: 1px solid #ddd;
+
+				img {
+					width: 180 * @px;
+					height: 160 * @px;
+				}
+
+				&-info {
+					flex: 1;
+					padding-left: 20 * @px;
+
+					h3,.desc {
+						display: -webkit-box;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						-webkit-line-clamp: 1;
+						-webkit-box-orient: vertical;
+					}
+
+					h3 {
+						font-size: 30 * @px;
+						color: rgb( 102, 102, 102 );
+						margin-bottom: 20 * @px;
+					}
+
+					.desc {
+						font-size: 26 * @px;
+						color: rgb( 126, 126, 126 );
+						margin-bottom: 25 * @px;
+					}
+
+					.now {
+						font-size: 36 * @px;
+						color: rgb( 0, 180, 255 );
+					}
+
+					.old {
+						font-size: 26 * @px;
+						color: rgb( 204, 204, 204 );
+						text-decoration: line-through;
+					}
+
+					.sum {
+						font-size: 26 * @px;
+  						color: rgb( 126, 126, 126 );
+					}
+
+					span.buy {
+						float: right;
+					}
+
+					var {
+						font-size: 36 * @px;
+						color: rgb( 102, 102, 102 );
+					}
+
+
+				}
+
+				.reduce,.add {
+					padding: 0 10 * @px;
+					border: 1px solid rgb( 204, 204, 204 );
+					border-radius: 10 * @px;
+					color: rgb( 204, 204, 204 );
+				}
+
+				.active {
+					border-color: rgb( 0, 180, 255 );
+					color: rgb( 0, 180, 255 );
+				}
+			}
+		}
+	}
+
+	&-oper {
+		background-color: #1c1b1f;
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		height: 103 * @px;
+		display: flex;
+		color: #fff;
+		font-size: 18 * @px;
+		/* padding: 10 * @px 0; */
+
+		justify-content: center;
+		align-items: center;
+
+		&-item {
+			flex: 1;
+			text-align: center;
+
+			.img-wrap {
+				height: 56 * @px;
+				line-height: 56 * @px;
+			}
+
+			.img-home {
+				position: relative;
+				top: 11 * @px;
+			}
+
+			img {
+				width: 52 * @px;
+			}
+
+			.img-user {
+				width: 44 * @px;
+			}
+		}
+
+		&-center {
+			flex: 1;
+		}
+
+	}
+}
