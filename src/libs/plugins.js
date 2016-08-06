@@ -46,6 +46,12 @@ var plugin = {
 					require(['../components/Home/Home.vue'], resolve);
 				}
 			},
+			'/list': {
+				name: 'list',
+				component (resolve) {
+					require(['../components/List/List.vue'], resolve);
+				}
+			},
 			'/test': {
 				name: 'test',
 				component (resolve) {

@@ -1,0 +1,75 @@
+@import "../common";
+
+.mod-item {
+
+	display: flex;
+	padding: 20 * @px 0;
+	border-bottom: 1px solid #ddd;
+
+	img {
+		width: 180 * @px;
+		height: 160 * @px;
+	}
+
+	&-info {
+		flex: 1;
+		padding-left: 20 * @px;
+
+		h3,.desc {
+			display: -webkit-box;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			-webkit-line-clamp: 1;
+			-webkit-box-orient: vertical;
+		}
+
+		h3 {
+			font-size: 30 * @px;
+			color: rgb( 102, 102, 102 );
+			margin-bottom: 20 * @px;
+		}
+
+		.desc {
+			font-size: 26 * @px;
+			color: rgb( 126, 126, 126 );
+			margin-bottom: 25 * @px;
+		}
+
+		.now {
+			font-size: 36 * @px;
+			color: rgb( 0, 180, 255 );
+		}
+
+		.old {
+			font-size: 26 * @px;
+			color: rgb( 204, 204, 204 );
+			text-decoration: line-through;
+		}
+
+		.sum {
+			font-size: 26 * @px;
+				color: rgb( 126, 126, 126 );
+		}
+
+		span.buy {
+			float: right;
+		}
+
+		var {
+			font-size: 36 * @px;
+			color: rgb( 102, 102, 102 );
+		}
+	}
+
+	.reduce,.add {
+		padding: 0 10 * @px;
+		border: 1px solid rgb( 204, 204, 204 );
+		border-radius: 10 * @px;
+		color: rgb( 204, 204, 204 );
+	}
+
+	.active {
+		border-color: rgb( 0, 180, 255 );
+		color: rgb( 0, 180, 255 );
+	}
+}

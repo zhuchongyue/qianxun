@@ -27,7 +27,6 @@
                     <img src="./img/sanjiao.png">
                 </div>
             </div>
-            
         </div>
         <div class="home-banner">
             <swiper :list="banners"></swiper>
