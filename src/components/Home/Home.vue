@@ -1,7 +1,36 @@
 <template>
     <div class="home">
+
+        <div class="home-time">
+
+            <div class="home-time-content">
+                <div class="word">
+                    提货时间:
+                </div>
+                <div class="date">
+                    <p class="date-item date-selected">
+                        2016年8月1号 星期一 
+                        <img src="./img/selected.png" alt="">
+                    </p>
+                   <!--  <p class="date-item">
+                       2016年8月1号 星期一
+                       <img src="./img/selected.png" alt="">
+                   </p>
+                   <p class="date-item">
+                       2016年8月1号 星期一
+                       <img src="./img/selected.png" alt=""></p>
+                   <p class="date-item">2016年8月1号 星期一
+                       <img src="./img/selected.png" alt="">
+                   </p> -->
+                </div>
+                <div @click="spread" class="spread">
+                    <img src="./img/sanjiao.png">
+                </div>
+            </div>
+            
+        </div>
         <div class="home-banner">
-        	<img src="./img/banne.png" alt="">
+            <swiper :list="banners"></swiper>
         </div>
         <div class="home-nav">
         	<div class="home-nav-indep">
@@ -58,7 +87,7 @@
         <div class="home-list">
         	<div class="home-list-word">
         		<p></p>
-        		<span>热门推荐</span>
+        		<span>当季热门</span>
         	</div>
         	<div class="home-list-content">
         		<div v-for="var p in length" class="home-list-content-item">
@@ -116,12 +145,37 @@
     @import "Home.less";
 </style>
 <script>
+
+import swiper from '../Swiper/Swiper.vue'
+
 export default {
     name: 'home',
     data() {
     	return {
-    		length:[1,2,3]
+    		length:[1,2,3],
+            banners:[
+                {img: './img/banne.png'},
+                {img: './img/banne.png'},
+                {img: './img/banne.png'},
+            ]
     	}
+    },
+    route: {
+        data() {
+            this.$http.jsonp("getBannersAndTime",{params:{
+                groupbuyId: 1
+            }}).then(response => {
+                console.log(response)
+            })
+        }
+    },
+    methods: {
+        spread() {
+
+        }
+    },
+    components: {
+        swiper
     }
 }
 </script>

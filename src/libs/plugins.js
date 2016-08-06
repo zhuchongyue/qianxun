@@ -21,7 +21,7 @@ var plugin = {
 		Vue.use(Vuex);
 	},
 	resourceGlobalSetting() {
-		Vue.http.options.root = "http://zhuanzhuan.58.com/zz/transfer";
+		Vue.http.options.root = "http://www-test.qx-llt.com/transfer/";
 	},
 	runRouter() {
 		var routeMap = this.createRouteMap();
