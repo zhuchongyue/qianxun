@@ -21,7 +21,7 @@ var plugin = {
 		Vue.use(Vuex);
 	},
 	resourceGlobalSetting() {
-		Vue.http.options.root = "http://www-test.qx-llt.com/transfer/";
+		Vue.http.options.root = "http://www-test.qx-llt.com/transfer";
 	},
 	runRouter() {
 		var routeMap = this.createRouteMap();
@@ -50,6 +50,18 @@ var plugin = {
 				name: 'list',
 				component (resolve) {
 					require(['../components/List/List.vue'], resolve);
+				}
+			},
+			'/delivery': {
+				name: 'delivery',
+				component (resolve) {
+					require(['../components/Delivery/Delivery.vue'], resolve);
+				}
+			},
+			'/gdetail': {
+				name: 'group-detail',
+				component (resolve) {
+					require(['../components/GroupDetail/GroupDetail.vue'], resolve);
 				}
 			},
 			'/test': {

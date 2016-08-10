@@ -88,7 +88,10 @@
         		<p></p>
         		<span>当季热门</span>
         	</div>
+
+
         	<div class="home-list-content">
+                <group-item></group-item>
         		<div v-for="var p in length" class="home-list-content-item">
         			<img src="./img/luobo.png" alt="">
         			<div class="home-list-content-item-info">
@@ -147,22 +150,32 @@
 
 import swiper from '../Swiper/Swiper.vue'
 
+import util from '../../libs/util.js'
+
+import groupItem from '../Common/GroupItem.vue'
+
 export default {
     name: 'home',
     data() {
     	return {
     		length:[1,2,3],
-            banners:[
-                {img: './img/banne.png'},
-                {img: './img/banne.png'},
-                {img: './img/banne.png'},
-            ]
+            banners:[]
     	}
     },
     route: {
         data() {
-            this.$http.jsonp("getBannersAndTime",{params:{
-                groupbuyId: 1
+            this.$http.jsonp("getBannersAndTimes").then(response => {
+
+                if(response.data.respCode == 0) {
+                    this.banners = response.data.respData.banners.map(value => {
+                        return {img: util.handleImg(value.imgUrl)}
+                    })
+                }
+            });
+
+            this.$http.jsonp("getRecommendInfo", {params: {
+                pageNo:1,
+                pageSize:10
             }}).then(response => {
                 console.log(response)
             })
@@ -174,7 +187,8 @@ export default {
         }
     },
     components: {
-        swiper
+        swiper,
+        groupItem
     }
 }
 </script>
