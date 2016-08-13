@@ -21,7 +21,13 @@ var plugin = {
 		Vue.use(Vuex);
 	},
 	resourceGlobalSetting() {
-		Vue.http.options.root = "http://www-test.qx-llt.com/transfer";
+
+		if(process.env.NODE_ENV !== 'production') {
+			Vue.http.options.root = "http://www-test.qx-llt.com/transfer";
+		}else{
+			Vue.http.options.root = "http://www.qx-llt.com/transfer";
+		}
+
 	},
 	runRouter() {
 		var routeMap = this.createRouteMap();
@@ -40,28 +46,64 @@ var plugin = {
 	createRouteMap() {
 		var map = {
 			
-			'/': {
-				name: 'home',
+			'/': {       
+				name: 'home', //首页
 				component (resolve) {
 					require(['../components/Home/Home.vue'], resolve);
 				}
 			},
-			'/list': {
-				name: 'list',
+			'/list': { 
+				name: 'list', //列表页
 				component (resolve) {
 					require(['../components/List/List.vue'], resolve);
 				}
 			},
-			'/delivery': {
+			'/delivery': {   //支付页
 				name: 'delivery',
 				component (resolve) {
 					require(['../components/Delivery/Delivery.vue'], resolve);
 				}
 			},
-			'/gdetail': {
-				name: 'group-detail',
+			'/gdetail': {        
+				name: 'group-detail',   //团购详情页
 				component (resolve) {
 					require(['../components/GroupDetail/GroupDetail.vue'], resolve);
+				}
+			},
+			'/success': {
+				name: 'success',       //普通商品支付成功页
+				component (resolve) {
+					require(['../components/Success/Success.vue'], resolve);
+				}
+			},
+			'/gsuccess': {
+				name: 'gsuccess',
+				component (resolve) {  //团购商品支付成功页
+					require(['../components/Gsuccess/Gsuccess.vue'],resolve);
+				}
+			},
+			'/mine': {
+				name: 'mine',          //我的
+				component (resolve) {
+					require(['../components/Mine/Mine.vue'], resolve);
+				}
+			},
+			'/mygroup': {
+				name: 'mygroup',       //我的拼团
+				component (resolve) {
+					require(['../components/MyGroup/MyGroup.vue'], resolve);
+				}
+			},
+			'/fail': {
+				name:'fail',
+				component (resolve) {
+					require(['../components/Fail/Fail.vue'], resolve);
+				}
+			},
+			'order': {
+				name: 'order',     //我的订单
+				component (resolve) {
+					require(['../components/Order/Order.vue'], resolve);
 				}
 			},
 			'/test': {

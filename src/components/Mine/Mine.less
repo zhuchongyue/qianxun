@@ -1,0 +1,63 @@
+@import "../common";
+
+.mine{
+	background-color: #e6e6e6;
+	&-info {
+		text-align: center;
+		padding: 40 *@px 0 50 * @px 0;
+
+		img {
+			width: 100*@px;
+			height: 100*@px;
+			border-radius: 50%;
+		}	
+		&-name {
+			  font-size: 30*@px;
+			  color: rgb( 0, 0, 0 );
+		}
+	}
+
+	&-items {
+		background-color: #fff;
+		padding-left: 30 * @px;
+		border-bottom: 1px solid @bottom;
+		&-item {
+			display: block;
+			padding: 30 * @px 0;
+			border-bottom: 1px solid @split;
+			  font-size: 26*@px;
+			  color: rgb( 102, 102, 102 );
+
+			&:last-child {
+				border-bottom: 0;
+			}
+
+			span {
+				display: inline-block;
+				width: 40 * @px;
+			}
+
+			.icon1 {
+				width: 20 * @px;
+				height: 24 * @px;
+			}
+
+			.icon2 {
+				width: 24 * @px;
+				height: 22 * @px;
+			}
+
+			.icon3 {
+				width: 24 * @px;
+				height: 24 * @px;
+			}
+
+			.arrow {
+				width: 14 * @px;
+				height: 24 * @px;
+				float: right;
+				margin-right: 30 * @px;
+			}
+		}
+	}
+}

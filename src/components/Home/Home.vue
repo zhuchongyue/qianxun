@@ -3,25 +3,39 @@
 
         <div class="home-time">
 
-            <div class="home-time-content">
+            <div v-if="timeDefault" @click="spread" class="home-time-content home-time-content-default">
                 <div class="word">
                     提货时间:
                 </div>
-                <div class="date">
-                    <p class="date-item date-selected">
+                <div class="date date-default">
+                    <!-- <p class="date-item ">
                         2016年8月1号 星期一 
                         <img src="./img/selected.png" alt="">
+                    </p> -->
+                    <p class="date-item date-selected">
+                        {{selectedTime.time}}
+                        <img src="./img/selected.png" alt=""> 
                     </p>
-                   <!--  <p class="date-item">
-                       2016年8月1号 星期一
-                       <img src="./img/selected.png" alt="">
-                   </p>
-                   <p class="date-item">
-                       2016年8月1号 星期一
-                       <img src="./img/selected.png" alt=""></p>
-                   <p class="date-item">2016年8月1号 星期一
-                       <img src="./img/selected.png" alt="">
-                   </p> -->
+                  
+                </div>
+                <div @click="spread" class="spread">
+                    <img src="./img/up.png">
+                </div>
+            </div>
+            <div v-else class="home-time-content">
+                <div class="word">
+                    提货时间:
+                </div>
+                <div class="date date-default">
+                    <!-- <p class="date-item date-selected">
+                        2016年8月1号 星期一 
+                        <img src="./img/selected.png" alt="">
+                    </p> -->
+                    <p v-for="time in times" @click="selectTime(time)" class="date-item" :class="{ 'date-selected': time.groupbuyId == selectedTime.groupbuyId}">
+                       {{ time.time }}
+                        <img v-if="time.groupbuyId == selectedTime.groupbuyId" src="./img/selected.png" alt=""> 
+                    </p>
+                    
                 </div>
                 <div @click="spread" class="spread">
                     <img src="./img/sanjiao.png">
@@ -159,7 +173,10 @@ export default {
     data() {
     	return {
     		length:[1,2,3],
-            banners:[]
+            banners:[],
+            times:[],
+            selectedTime:{ time: "星期一"},
+            timeDefault: true
     	}
     },
     route: {
@@ -167,23 +184,44 @@ export default {
             this.$http.jsonp("getBannersAndTimes").then(response => {
 
                 if(response.data.respCode == 0) {
+                    this.times = response.data.respData.times
                     this.banners = response.data.respData.banners.map(value => {
-                        return {img: util.handleImg(value.imgUrl)}
+                        value.img = util.handleImg(value.imgUrl)
+                        return value
                     })
+
                 }
             });
 
-            this.$http.jsonp("getRecommendInfo", {params: {
+            this.$http.jsonp("getRecommendInfo", { params: {
                 pageNo:1,
                 pageSize:10
             }}).then(response => {
-                console.log(response)
+                console.log(response.data.respData)
+            })
+
+            this.$http.jsonp("getListInfo", { params: {
+                pageNo:1,
+                pageSize:10
+            }}).then(response => {
+                console.log(response.data.respData)
+            })
+
+            this.$http.jsonp("getTeamGoodsList", {params: {
+                pageNo:1,
+                pageSize:10
+            }}).then(response => {
+                console.log(response.data.respData)
             })
         }
     },
     methods: {
+        selectTime(time) {
+            this.selectedTime = time
+            this.timeDefault = true
+        },
         spread() {
-
+            this.timeDefault = false
         }
     },
     components: {

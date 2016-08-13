@@ -1,0 +1,78 @@
+@import "../common";
+
+@dark : rgb( 102, 102, 102 );
+@blue : rgb( 0, 180, 255 );
+
+.order {
+	font-size: 26*@px;
+	&-item {
+		background-color: #fff;
+		padding: 0 30 * @px;
+		border-bottom: 1px solid @bottom;
+		margin-top: 10 * @px;
+		&:first-child {
+			margin-top:0;
+		}
+
+		
+		&-title {
+			padding: 20 * @px 0;
+			border-bottom: 1px solid @split;
+			span {
+				float: right;
+				color: @blue;
+			}
+		}
+
+		&-detail {
+			font-size: 24 * @px;
+			span {
+				float: right;
+				color: @blue;
+			}
+			p {
+				padding-top: 15 * @px;
+			}
+		}
+
+		&-oper {
+			padding-top: 40 * @px;
+			padding-bottom: 20 * @px;
+			color: @blue;
+
+			p {
+				overflow: hidden;
+				line-height: 62 * @px;
+			}
+
+			.price {
+			  font-size: 30*@px;
+			}
+
+
+			button {
+				color: @blue;
+				float: right;
+				font-size: 30*@px;
+				border: 4*@px solid @blue;
+				background-color: #fff;
+				width: 196*@px;
+				height: 58 *@px;
+				border-radius: 10 * @px;
+
+			}
+
+			.delivery {
+				float: right;
+			}
+		}
+
+		&-down {
+			color:#ff8e09;
+		}
+
+		&-end {
+			color: @dark;
+		}
+	}
+}
