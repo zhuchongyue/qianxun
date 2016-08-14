@@ -60,10 +60,10 @@
 export default {
     name: 'success',
     data(){
-        return {
-            showMask: true
-        }
-    },
+            return {
+                showMask: true
+            }
+        },
     methods: {
         hideMask(){
             this.showMask = false;

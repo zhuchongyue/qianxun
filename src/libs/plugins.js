@@ -100,16 +100,22 @@ var plugin = {
 					require(['../components/Fail/Fail.vue'], resolve);
 				}
 			},
-			'order': {
+			'/order': {
 				name: 'order',     //我的订单
 				component (resolve) {
 					require(['../components/Order/Order.vue'], resolve);
 				}
 			},
-			'/test': {
-				name: 'test',
+			'/invite': {
+				name: 'invite',   //邀请好友
 				component (resolve) {
-					require(['../components/Test/Test.vue'], resolve);
+					require(['../components/Invite/Invite.vue'], resolve);
+				}
+			},
+			'ticket': {
+				name: 'ticket',
+				component (resolve) {
+					require(['../components/Ticket/Ticket.vue'], resolve);
 				}
 			}
 			

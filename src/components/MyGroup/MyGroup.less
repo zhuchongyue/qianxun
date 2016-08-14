@@ -1,0 +1,110 @@
+
+@import '../common.less';
+
+.mygroup {
+
+	
+	&-info {
+		text-align: left;
+		display: flex;
+		background-color: #fff;
+		margin-top: 10 * @px;
+		padding-right: 10 * @px;
+		img {
+			width: 230 * @px;
+			height: 230 * @px;
+		}
+		&-item {
+			flex: 1;
+			position: relative;
+			padding-top: 30 * @px;
+			.title {
+				color: rgb( 102, 102, 102 );
+			}
+			.count {
+				float: right;
+				font-size: 30*@px;
+				color: @blue;
+			}
+
+			.lack {
+				  font-size: 26*@px;
+				  color: rgb( 255, 138, 0 );
+			}
+
+			.invite {
+				position: absolute;
+				right: 0;
+				bottom: 25*@px;
+				color: @blue;
+				border: 1px solid @blue;
+				background-color: #fff;
+				border-radius: 10 * @px;
+				padding: 10 * @px 20 * @px;
+			}
+			.fail {
+				position: absolute;
+				font-size: 26 * @px;
+				right: 0;
+				bottom: 40*@px;
+  				color: rgb( 102, 102, 102 );
+
+			}
+			.success {
+				  font-size: 26*@px;
+				  color: rgb( 255, 138, 0 );
+				  position: absolute;
+				  right: 0;
+				  bottom: 40*@px;
+			}
+		}
+
+		p.detail {
+			color: @blue;
+			line-height: 36 * @px;
+			padding: 20 * @px 0;
+			.price {
+				  font-size: 36*@px;
+			}
+
+		}
+	}
+
+
+	&-mask {
+		position: fixed;
+  		left: 0;
+  		top:0;
+		width: 100%;
+		height:100%;
+		background-color: rgba(0,0,0,0.502);
+
+		&-con {
+			background-color: rgb( 0, 173, 245 );
+			color: #fff;
+			font-size: 28*@px;
+			width: 80%;
+			margin: 40 * @px auto;
+			padding: 20 * @px;
+			position: relative;
+			border-radius: 10 * @px;
+			opacity: 1;
+			.tangle {
+				position: absolute;
+				width: 33 * @px;
+				height: 24 * @px;
+				right: 35 * @px;
+				top: -23 * @px;
+			}
+
+			.remind {
+			position: absolute;
+			width: 60 * @px;
+			height: 60 * @px;
+			right: 20 * @px;
+			top: 40 *@px;
+		}
+		}
+
+	}
+}
