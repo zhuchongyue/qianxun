@@ -4,13 +4,13 @@
 		<div class="group-infos">
 			<p class="group-infos-price">
 				<span class="now">
-					￥29.8
+					￥{{detail.price}}
 				</span>
 				<span class="old">
-					￥35.9
+					￥{{detail.marketPrice}}
 				</span>
 				<span class="count">
-					累积销量:9999件
+					累积销量:{{detail.totalSaleNum}}件
 				</span>
 			</p>
 			<h3>
@@ -261,9 +261,24 @@
 					{img: './img/banner.png'},
 					{img: './img/banner.png'},
 					{img: './img/banner.png'},
-				]
+				],
+				detail: {}
 			}
 		},
+		route: {
+			data() {
+				this.$http.jsonp("getGoodsInfo", {
+					params: {
+						groupGoodsId: 2
+					}
+				}).then(response => {
+					if(response.data.respCode == 0 ){
+						this.detail = response.data.respData
+						console.log(this.detail)
+					}
+				})
+			}
+		},	
 		components:{
 			Swiper
 		}

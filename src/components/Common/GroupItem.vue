@@ -1,12 +1,12 @@
 <template>
 	<a href="/" class="group-wrap">
 		<div class="group" href="">
-			<img src="./img/luobo.png"/>
+			<img :src="product.img | handleImg"/>
 			<div class="group-info">
-				<h3>日本进口草莓 500g</h3>
-				<p class="desc">海关直供，新鲜采摘</p>
-				<p class="oldpri">￥88</p>
-				<p class="oper">3人团价 <span class="now">￥59.9</span>
+				<h3>{{product.title}}</h3>
+				<p class="desc">{{product.subTitle}}</p>
+				<p class="oldpri">￥{{product.price}}</p>
+				<p class="oper">{{product.groupPerson}}人团价 <span class="now">￥{{product.groupPrice}}</span>
 					<span class="oper-buy">
 					<i></i>抢购</span>
 				</p>
@@ -18,8 +18,15 @@
 	@import "GroupItem.less";
 </style>
 <script>
+
+	import util from '../../libs/util.js'
+
 	export default {
 		name: 'GroupItem',
+		props:['product'],
+		filters:{
+			handleImg: util.handleImg
+		},
 		data(){
 			return {
 

@@ -1,21 +1,21 @@
 <template>
 	<div class="mod-item">
-		<img src="./img/luobo.png" alt="">
+		<img :src="product.img | handleImg" alt="">
 		<div class="mod-item-info">
-			<h3>新西兰进口胡萝新西兰进口胡萝卜</h3>
+			<h3>{{ product.title }}</h3>
 			<p class="desc">
-				新鲜采摘绝无农药新鲜采摘绝无农药
+				{{ product.subTitle }}
 			</p>
 			<p>
 				<span class="now">
-					￥28.9	
+					￥{{ product.price }}
 				</span>
 				<span class="old">
-					￥45.9
+					￥{{ product.marketPrice }}
 				</span>
 			</p>
 			<p>
-				<span class="sum">已收343份</span>
+				<span class="sum">已收{{ product.saleNum }}份</span>
 				<span class="buy">
 					<b class="reduce">-</b>
 					<var>0</var>
@@ -29,8 +29,16 @@
 	@import 'GeneralItem.less';
 </style>
 <script>
+	import util from '../../libs/util.js'
+
 	export default {
 		name: 'GeneralItem',
-		props: ['item']
+
+		filters:{
+			handleImg: util.handleImg
+		},
+
+		props: ['product']
 	}
+
 </script>

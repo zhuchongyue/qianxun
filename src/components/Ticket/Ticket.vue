@@ -41,7 +41,7 @@
                     </p>
                 </div>
                 <span class="deadline">
-                    2016.8.29过期 
+                    2016.8.29过期
                 </span>
             </div>
         </div>

@@ -64,6 +64,12 @@ var plugin = {
 					require(['../components/Delivery/Delivery.vue'], resolve);
 				}
 			},
+			'/detail': {
+				name: 'detail', //普通商品详情页
+				component (resolve) {
+					require(['../components/Detail/Detail.vue'], resolve);
+				}
+			},
 			'/gdetail': {        
 				name: 'group-detail',   //团购详情页
 				component (resolve) {

@@ -15,9 +15,23 @@
   	</div>
 
   	<div class="list-items">
-  		<general-item></general-item>
-  		<general-item></general-item>
-  		<general-item></general-item>
+      <template v-for="product in productList">
+          <template v-if="product.isCanGroup==1">
+
+              <group-item :product="product"></group-item>
+              
+          </template>
+          <template v-else>
+
+            <general-item :product="product"></general-item>
+
+          </template>
+      </template>
+  		<!--
+      groupItem
+      <general-item></general-item>
+      <general-item></general-item>
+      <general-item></general-item> -->
   	</div>
 
   	<div class="list-oper">
@@ -44,10 +58,31 @@ import DateEle from '../Common/Date.vue'
 
 import GeneralItem from '../Common/GeneralItem.vue'
 
+import GroupItem from '../Common/GroupItem.vue'
+
 export default {
     name: 'home',
+    data(){
+      return {
+        productList: []
+      }
+    },
+    route: {
+      data() {
+        this.$http.jsonp("getListInfo", { params: {
+           pageNo:1,
+           pageSize: 20
+        }
+        }).then(response => {
+            if(response.data.respCode == 0) {
+              this.productList = response.data.respData
+            }
+        })
+      }
+    },
     components: {
-        dateEle:DateEle,
-        generalItem: GeneralItem
+        dateEle: DateEle,
+        generalItem: GeneralItem,
+        groupItem: GroupItem
     }
 }

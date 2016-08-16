@@ -1,1 +1,361 @@
 @import '../common.less';
+
+@blue : rgb( 0, 180, 255 );
+
+.none {
+	display: none;
+}
+
+.detail {
+
+	background-color: #e6e6e6;
+
+	&-infos {
+		background-color: #fff;
+		padding: 20*@px 0 * @px;
+		border-bottom: 1px solid @bottom;
+
+		&>* {
+			padding: 0 30 * @px;
+		}
+
+		&-price {
+			.now {
+				  font-size: 36*@px;
+				  color: @blue;
+			}
+
+			.old {
+				  font-size: 26*@px;
+				  color: rgb( 204, 204, 204 );
+				  text-decoration: line-through;
+			}
+
+			.count {
+				  font-size: 26*@px;
+				  color: rgb( 126, 126, 126 );
+				  float: right;
+				  position: relative;
+				  margin-top: -20 * @px;
+
+				  button {
+				  	  font-size: 24*@px;
+				  	  color: rgb( 0, 180, 255 );
+				  	  border: 1px solid rgb(0,180,255);
+				  	  background-color: #fff;
+				  	  padding: 10 *@px 20 * @px;
+				  	  border-radius: 10 * @px;
+				  }
+			}
+		}
+
+		h3 {
+
+			  font-size: 30*@px;
+			  color: rgb( 102, 102, 102 );
+			  padding: 10 * @px 30*@px 15* @px 30*@px;
+			  padding-bottom: 0;
+		}
+
+		&-invite {
+			border-top: 1px solid @split;
+			border-bottom: 1px solid @split;
+			padding: 5 *@px 30*@px;
+			a {
+				display: block;
+				width: 100%;
+				  font-size: 24*@px;
+				  color: rgb( 255, 138, 0 );
+				img {
+					float: right;
+					width: 14*@px;
+					height: 24*@px;
+					margin-top: 5*@px;
+				}
+			}
+		}
+
+		ul {
+			padding-top: 15 * @px;
+		}
+
+		ul li {
+			  font-size: 24*@px;
+			  color: rgb( 126, 126, 126 );
+			  position: relative;
+			  padding-left: 20 * @px;
+
+			  &:before {
+			  	content:'.';
+			  	display:inline-block;
+				width: 6*@px;
+				height: 6*@px;
+				border-radius: 50%;
+				background-color: @blue;
+				color: #fff;
+				position: absolute;
+				left: 0*@px;
+				top: 50%;
+			  } 
+		}
+
+		&-tag {
+			  font-size: 23*@px;
+			  color: rgb( 0, 180, 255 );
+			  padding: 15 * @px 30*@px;
+
+			  span {
+			  	margin-right: 40 * @px;
+			  }
+
+			  img {
+			  	height: 23 * @px;
+			  	margin-right: 15 * @px;
+			  	vertical-align: text-top
+			  }
+		}
+
+		&-specific {
+			  font-size: 24*@px;
+			  color: rgb( 126, 126, 126 );
+		}
+	}
+
+
+	&-list {
+
+		margin-top: 10 * @px;
+		background-color: #fff;
+		padding: 20 * @px 30 * @px;
+		padding-bottom: 5*@px;
+
+		&-title {
+			font-size: 26*@px;
+			color: rgb( 102, 102, 102 );
+			padding-bottom: 5*@px;
+		}
+
+		&-item {
+			display: flex;
+			padding-bottom: 15 * @px;
+			border-bottom: 1px solid @split;
+			padding-top: 15 * @px;
+
+			&:last-child {
+				border-bottom:0;
+			}
+
+
+			img {
+				width: 85*@px;
+				height: 85*@px;
+				border-radius: 10 * @px;
+				margin-right: 15 * @px;
+			}
+
+			&-content {
+				flex: 1;
+				display: flex;
+
+				&-addr {
+					flex: 1;
+					position: relative;
+
+					.name {
+						  font-size: 30*@px;
+						  color: rgb( 0, 0, 0 );
+					}
+
+					.detail {
+						  font-size: 22*@px;
+						  color: rgb( 126, 126, 126 );
+						  position: absolute;
+						  bottom: 0;
+					}
+				}
+
+				&-go {
+					flex: 1;
+					font-size: 22*@px;
+					color: rgb( 0, 180, 255 );
+					flex-basis: 160 * @px;
+					align-self: center;
+					text-align: right;
+					span.group {
+						  font-size: 24*@px;
+						  color: rgb( 0, 180, 255 );
+						  border: 1px solid rgb(0,180,255);
+						  padding: 10 * @px;
+						  border-radius: 8 * @px;
+						  background-color: #fff;
+						  i {
+						  	display: inline-block;
+						  	background: url(./img/arrow.png) no-repeat;
+						  	height: 24 * @px;
+						  	width: 22*@px;
+						  	background-size: 100% 100%;
+						  	vertical-align: middle;
+						  }
+					}
+				}
+			}
+		}
+	}
+
+	&-intro {
+		margin-top: 10 * @px;
+
+		margin-bottom: 90*@px;
+
+		&-tap{
+			background-color: #fff;
+			display: flex;
+			
+
+			&-item {
+				flex: 1;
+				text-align: center;
+				
+				padding: 20 * @px 0;
+			}
+
+			.selected {
+				color: @blue;
+				border-bottom: 1px solid @blue;
+			}
+		}
+
+		&-contents {
+			margin-top: 10*@px;
+			background-color: #fff;
+			
+
+			&-spec {
+				padding-left: 30*@px;
+				p {
+					border-bottom: 1px solid @split;
+					padding: 10 * @px 0;
+
+					&:last-child {
+						border-bottom: 0;
+					}
+
+					.name {
+						  font-size: 24*@px;
+						  display: inline-block;
+						  width: 120 * @px;
+						  text-align: right;
+						  margin-right: 20 * @px;
+						  color: rgb( 126, 126, 126 );
+					}
+
+					.spec {
+						  font-size: 24*@px;
+						  color: rgb( 0, 0, 0 );
+					}
+				}
+			}
+
+			&-detail {
+				padding-bottom: 10 * @px;
+
+				.img-wrap {
+					padding-bottom: 10 * @px;
+					background-color: @bdgColor;
+				}
+
+				img {
+					width: 100%;
+				}
+
+				p {
+					border-bottom: 1px solid @split;
+					padding: 10 * @px 0;
+
+					&:last-child {
+						border-bottom: 0;
+					}
+
+					.name {
+						  font-size: 24*@px;
+						  display: inline-block;
+						  width: 120 * @px;
+						  text-align: right;
+						  margin-right: 20 * @px;
+						  color: rgb( 126, 126, 126 );
+					}
+
+					.spec {
+						  font-size: 24*@px;
+						  color: rgb( 0, 0, 0 );
+					}
+				}
+			}
+
+			&-rule {
+				padding: 10 * @px 30 * @px;
+				img {
+					width: 100%;
+				}
+			}
+		}
+	}
+
+	&-oper {
+		position: fixed;
+		width: 100%;
+		left: 0;
+		bottom: 0;
+		display: flex;
+		height: 90*@px;
+		justify-content:center;
+		align-items:center;
+
+		color: #fff;
+		text-align: center;
+
+		&-item {
+			flex: 1;
+			height: 100%;
+
+			a {
+				display: block;
+			}
+		}
+
+		&-home {
+
+			.img-wrap {
+				height: 56 * @px;
+				line-height: 56 * @px;
+			}
+
+			.img-home {
+				position: relative;
+				top: 11 * @px;
+			}
+
+			img {
+				width: 52 * @px;
+			}
+
+			background-color: #1c1b1f;
+			font-size: 18*@px;
+		}
+
+		.price {
+			  font-size: 30*@px;
+			  padding: 5*@px 0;
+		}
+
+		&-alone {
+			background-color: #f15d6e;
+			font-size: 24*@px;
+		}
+
+		&-all {
+			background-color: rgb( 0, 180, 255 );
+			font-size: 24*@px;
+		}
+	}
+}

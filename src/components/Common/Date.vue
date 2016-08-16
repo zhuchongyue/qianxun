@@ -21,7 +21,7 @@
                  <img src="./img/selected.png" alt="">
              </p> -->
           </div>
-          <div @click="spread" class="spread">
+          <div @click="" class="spread">
               <img src="./img/sanjiao.png">
           </div>
       </div>

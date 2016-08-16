@@ -105,32 +105,66 @@
 
 
         	<div class="home-list-content">
-                <group-item></group-item>
-        		<div v-for="var p in length" class="home-list-content-item">
-        			<img src="./img/luobo.png" alt="">
-        			<div class="home-list-content-item-info">
-        				<h3>新西兰进口胡萝新西兰进口胡萝卜</h3>
-        				<p class="desc">
-        					新鲜采摘绝无农药新鲜采摘绝无农药
-        				</p>
-        				<p>
-        					<span class="now">
-        						￥28.9	
-        					</span>
-							<span class="old">
-								￥45.9
-							</span>
-        				</p>
-        				<p>
-        					<span class="sum">已收343份</span>
-        					<span class="buy">
-        						<b class="reduce">-</b>
-        						<var>0</var>
-        						<b class="add active">+</b>
-        					</span>
-        				</p>
-        			</div>
-        		</div>
+                <template v-for="product in productList">
+                    <template v-if="product.isCanGroup==1">
+
+                        <group-item :product="product"></group-item>
+                        
+                    </template>
+                    <template v-else>
+                        <div class="home-list-content-item">
+                            <img :src="product.img | handleImg" alt="">
+                            <div class="home-list-content-item-info">
+                                <h3>{{product.title}}</h3>
+                                <p class="desc">
+                                    {{product.subTitle}}
+                                </p>
+                                <p>
+                                    <span class="now">
+                                        ￥{{product.price}}
+                                    </span>
+                                    <span class="old">
+                                        ￥{{product.marketPrice}}
+                                    </span>
+                                </p>
+                                <p>
+                                    <span class="sum">已售{{product.saleNum}}份</span>
+                                    <span class="buy">
+                                        <b class="reduce">-</b>
+                                        <var>0</var>
+                                        <b class="add active">+</b>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+                
+        		<!-- <div v-for="var p in length" class="home-list-content-item">
+                    <img src="./img/luobo.png" alt="">
+                    <div class="home-list-content-item-info">
+                        <h3>新西兰进口胡萝新西兰进口胡萝卜</h3>
+                        <p class="desc">
+                            新鲜采摘绝无农药新鲜采摘绝无农药
+                        </p>
+                        <p>
+                            <span class="now">
+                                ￥28.9    
+                            </span>
+                                            <span class="old">
+                                                ￥45.9
+                                            </span>
+                        </p>
+                        <p>
+                            <span class="sum">已收343份</span>
+                            <span class="buy">
+                                <b class="reduce">-</b>
+                                <var>0</var>
+                                <b class="add active">+</b>
+                            </span>
+                        </p>
+                    </div>
+                </div> -->
         	</div>
         	
         </div>
@@ -176,8 +210,12 @@ export default {
             banners:[],
             times:[],
             selectedTime:{ time: "星期一"},
-            timeDefault: true
+            timeDefault: true,
+            productList:[]
     	}
+    },
+    filters:{
+        handleImg: util.handleImg
     },
     route: {
         data() {
@@ -185,8 +223,25 @@ export default {
 
                 if(response.data.respCode == 0) {
                     this.times = response.data.respData.times
+                    if(process.env.NODE_ENV !== 'production') {
+                       this.times = this.times.concat([
+                                {
+                                    groupbuyId:3,
+                                    time:"2016-08-24 星期三"
+                                },
+                                {
+                                    groupbuyId:4,
+                                    time:"2016-08-25 星期四"
+                                }
+                            ])
+                    }
                     this.banners = response.data.respData.banners.map(value => {
                         value.img = util.handleImg(value.imgUrl)
+                        if(process.env.NODE_ENV !== 'production') {
+                            if(value.imgUrl == '') {
+                                value.img = "http://static.qx-llt.com/images/upload/20160806/3638ef587e1c43f2aabf9983797c9f6f.jpg"
+                            }
+                        }
                         return value
                     })
 
@@ -195,24 +250,14 @@ export default {
 
             this.$http.jsonp("getRecommendInfo", { params: {
                 pageNo:1,
-                pageSize:10
+                pageSize:30
             }}).then(response => {
-                console.log(response.data.respData)
+                if(response.data.respCode == 0){
+                    this.productList = response.data.respData
+                }
             })
 
-            this.$http.jsonp("getListInfo", { params: {
-                pageNo:1,
-                pageSize:10
-            }}).then(response => {
-                console.log(response.data.respData)
-            })
-
-            this.$http.jsonp("getTeamGoodsList", {params: {
-                pageNo:1,
-                pageSize:10
-            }}).then(response => {
-                console.log(response.data.respData)
-            })
+           
         }
     },
     methods: {
