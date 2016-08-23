@@ -149,11 +149,26 @@
     @import "Order.less";
 </style>
 <script>
+
+
+/*function getId() {
+    var userInfo = localStorage.getItem("userInfo");
+
+    return {
+        uid: userInfo.uid,
+        openId: userInfo.openid
+    }
+}*/
+
+
 export default {
     name: 'order',
     route: {
     	data(){
 
+            this.$http.jsonp("getMyOrders").then(response => {
+                console.log(response)
+            })
     	},
     	activate(){
     		document.body.style.backgroundColor="#e6e6e6"

@@ -10,21 +10,77 @@
 
 	import store from './vuex/store'
 
+	//import Cookie from './libs/cookie.js'
+	import Cookie from './libs/cookie.js'
+
 	export default {
 		store,
 
 		ready(){
-			/*https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
-
+			/*
+			https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
 
 			wx8031d15a06d4a296
 
 			*/
-			this.$http.jsonp("getInviteShare", {params: {
-				url: window.location.href
-			}}).then(response => {
+			/*this.$http.jsonp("getInviteShare", { params: {
+					url: window.location.href
+				}
+			}).then(response => {
 				console.log(response)
-			})
+			})*/
+
+
+			if(!localStorage.getItem("userInfo")) {
+				if(document.location.search.indexOf("code=") == -1) {
+					
+
+					window.location = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8031d15a06d4a296&redirect_uri=${encodeURIComponent(window.location.href)}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
+
+
+					
+					//https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
+				}
+
+				if( document.location.search.indexOf("code=") > 0) {
+
+
+					this.$http.jsonp("getMyAccount",{
+						params: {
+							code: this.$route.query.code
+						}
+					}).then( response => {
+						console.log(response)
+
+						if(response.data.respCode == 0) {
+							localStorage.setItem("userInfo",JSON.stringify(response.data.respData))
+							Cookie.set(Cookie.COOKIE_UID, response.data.respData.uid, Cookie.COOKIE_OPTION)
+							Cookie.set(Cookie.COOKIE_OPENID, response.data.respData.openid, Cookie.COOKIE_OPTION)
+
+							Cookie.set(Cookie.COOKIE_UID, response.data.respData.uid, { expires: 30, domain: 'www-test.qx-llt.com', path: '/'})
+							Cookie.set(Cookie.COOKIE_OPENID, response.data.respData.openid, { expires: 30, domain: 'www-test.qx-llt.com', path: '/'})
+						}
+					})
+
+					//获取openid
+					/*this.$http.jsonp("https://api.weixin.qq.com/sns/oauth2/access_token", {
+						params: {
+							appid: "wx8031d15a06d4a296",
+							secret: "SECRET",
+							code: this.$route.query.code,
+							grant_type: "authorization_code"
+						}
+					}).then( response => {
+						
+					})*/
+				}
+			}
+
+
+			
+
+			
+		
 		},
 	}
 

@@ -32,8 +32,8 @@ var plugin = {
 	runRouter() {
 		var routeMap = this.createRouteMap();
 		var router = this.router = new Router({
-			hashbang : false,
-			history : true,
+			/*hashbang : false,
+			history : true,*/
 			root : '/'
 		});
 
@@ -52,7 +52,7 @@ var plugin = {
 					require(['../components/Home/Home.vue'], resolve);
 				}
 			},
-			'/list': { 
+			'/list/:cateid': { 
 				name: 'list', //列表页
 				component (resolve) {
 					require(['../components/List/List.vue'], resolve);

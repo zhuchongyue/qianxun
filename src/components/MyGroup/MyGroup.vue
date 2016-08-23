@@ -119,7 +119,14 @@ export default {
     },
     route: {
     	data(){
-
+            var userInfo = JSON.parse(localStorage.getItem("userInfo"));
+            
+            this.$http.jsonp("getMyGroups", {
+                params: {
+                   uid: userInfo.uid,
+                   openId: userInfo.openid
+                }
+            })
     	},
     	activate(){
     		document.body.style.backgroundColor="#e6e6e6"

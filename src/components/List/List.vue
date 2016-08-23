@@ -4,13 +4,13 @@
 
   	<div class="list-nav">
   		<p>
-  			<a class="list-nav-item list-nav-item-selected">全部</a>
-  			<a href="" class="list-nav-item">蔬菜</a>
-  			<a href="" class="list-nav-item">水果</a>
-  			<a href="" class="list-nav-item">生态肉禽蛋</a>
+  			<a class="list-nav-item" :class="{'list-nav-item-selected': cateId == 0}">全部</a>
+  			<a href="" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 5}">蔬菜</a>
+  			<a href="" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 1}">水果</a>
+  			<a href="" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 4}">生态肉禽蛋</a>
   			<a href="" class="list-nav-item">低价拼团</a>
-  			<a href="" class="list-nav-item">放心海鲜</a>
-  			<a href="" class="list-nav-item">手工食品</a>
+  			<a href="" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 6}">放心海鲜</a>
+  			<a href="" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 7}">手工食品</a>
   		</p>
   	</div>
 
@@ -64,11 +64,19 @@ export default {
     name: 'home',
     data(){
       return {
-        productList: []
+        productList: [],
+      }
+    },
+    computed: {
+      cateId(){
+        return this.$route.params.cateid
       }
     },
     route: {
       data() {
+
+        console.log(this.cateId)
+
         this.$http.jsonp("getListInfo", { params: {
            pageNo:1,
            pageSize: 20

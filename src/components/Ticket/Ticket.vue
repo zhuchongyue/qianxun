@@ -77,5 +77,11 @@
 <script>
 export default {
     name: 'ticket',
-    
+    route: {
+        data() {
+            this.$http.jsonp("getMyTickets").then(response => {
+                console.log(response)
+            })
+        }
+    }
 }

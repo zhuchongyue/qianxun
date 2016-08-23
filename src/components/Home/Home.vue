@@ -56,43 +56,55 @@
 
         		<div class="home-nav-other-wrap">
 	        		<div class="home-nav-other-item">
-	        			<img class="fruit" src="./img/fruit.png" alt="">
-	        			<p>
-	        				新鲜水果
-	        			</p>
+                        <a v-link="{ name: 'list', params: {cateid: 1} }">
+    	        			<img class="fruit" src="./img/fruit.png" alt="">
+    	        			<p>
+    	        				新鲜水果
+    	        			</p>
+                        </a>
 	        		</div>
 	        		<div class="home-nav-other-item">
-	        			<img class="meat" src="./img/meat.png" alt="">
-	        			<p>
-	        				生态肉禽蛋
-	        			</p>
+                        <a v-link="{ name: 'list', params: {cateid: 4} }">
+    	        			<img class="meat" src="./img/meat.png" alt="">
+    	        			<p>
+    	        				生态肉禽蛋
+    	        			</p>
+                        </a>
 	        		</div>
 	        		<div class="home-nav-other-item">
-	        			<img class="vegetable" src="./img/vegetable.png" alt="">
-	        			<p>
-	        				安心蔬菜
-	        			</p>
+                        <a v-link="{ name: 'list', params: {cateid: 5} }">
+    	        			<img class="vegetable" src="./img/vegetable.png" alt="">
+    	        			<p>
+    	        				安心蔬菜
+    	        			</p>
+                        </a>
 	        		</div>
         		</div>
 
         		<div class="home-nav-other-wrap">
 	        		<div class="home-nav-other-item">
-	        			<img class="sea" src="./img/sea.png" alt="">
-	        			<p>
-	        				放心海鲜
-	        			</p>
+                        <a v-link="{ name: 'list', params: {cateid: 6} }">
+    	        			<img class="sea" src="./img/sea.png" alt="">
+    	        			<p>
+    	        				放心海鲜
+    	        			</p>
+                        </a>
 	        		</div>
 	        		<div class="home-nav-other-item">
-	        			<img class="handmade" src="./img/handmade.png" alt="">
-	        			<p>
-	        				手工食品
-	        			</p>
+                        <a v-link="{ name: 'list', params: {cateid: 7} }">
+    	        			<img class="handmade" src="./img/handmade.png" alt="">
+    	        			<p>
+    	        				手工食品
+    	        			</p>
+                        </a>
 	        		</div>
 	        		<div class="home-nav-other-item">
-	        			<img class="all" src="./img/all.png" alt="">
-	        			<p>
-	        				全部商品
-	        			</p>
+                        <a v-link="{ name: 'list', params: {cateid: 0} }">
+    	        			<img class="all" src="./img/all.png" alt="">
+    	        			<p>
+    	        				全部商品
+    	        			</p>
+                        </a>
 	        		</div>
 	        	</div>
         	</div>
@@ -183,10 +195,12 @@
         		<p>购物车</p>
         	</div>
         	<div class="home-oper-item">
-        		<div class="img-wrap">
-        			<img class="img-user" src="./img/user.png" alt="">
-        		</div>
-        		<p>我的</p>
+                <a v-link="{ name: 'mine'}">
+            		<div class="img-wrap">
+            			<img class="img-user" src="./img/user.png" alt="">
+            		</div>
+            		<p>我的</p>
+                </a>
         	</div>
         </div>
     </div>
@@ -244,6 +258,8 @@ export default {
                         }
                         return value
                     })
+
+                    console.log(this.banners)
 
                 }
             });
