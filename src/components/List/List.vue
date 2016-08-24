@@ -4,13 +4,13 @@
 
   	<div class="list-nav">
   		<p>
-  			<a class="list-nav-item" :class="{'list-nav-item-selected': cateId == 0}">全部</a>
-  			<a href="" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 5}">蔬菜</a>
-  			<a href="" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 1}">水果</a>
-  			<a href="" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 4}">生态肉禽蛋</a>
-  			<a href="" class="list-nav-item">低价拼团</a>
-  			<a href="" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 6}">放心海鲜</a>
-  			<a href="" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 7}">手工食品</a>
+  			<a v-link="{ name: 'list', params: {cateid: 0} }" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 0}">全部</a>
+  			<a v-link="{ name: 'list', params: {cateid: 5} }" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 5}">蔬菜</a>
+  			<a v-link="{ name: 'list', params: {cateid: 1} }" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 1}">水果</a>
+  			<a v-link="{ name: 'list', params: {cateid: 4} }" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 4}">生态肉禽蛋</a>
+  			<a v-link="{ name: 'list', params: {cateid: -1} }" class="list-nav-item" :class="{'list-nav-item-selected': cateId == -1}">低价拼团</a>
+  			<a v-link="{ name: 'list', params: {cateid: 6} }" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 6}">放心海鲜</a>
+  			<a v-link="{ name: 'list', params: {cateid: 7} }" class="list-nav-item" :class="{'list-nav-item-selected': cateId == 7}">手工食品</a>
   		</p>
   	</div>
 
@@ -23,7 +23,7 @@
           </template>
           <template v-else>
 
-            <general-item :product="product"></general-item>
+              <general-item :product="product"></general-item>
 
           </template>
       </template>
@@ -43,7 +43,9 @@
   				购物车是空的
   			</div>
   			<div class="list-oper-empty-summary">
-  				结算(0)
+          <a v-link="{name: 'delivery'}">
+  				    结算(0)
+          </a>
   			</div>
   		</div>
   	</div>

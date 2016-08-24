@@ -1,4 +1,5 @@
 <template>
+
     <div class="home">
 
         <div class="home-time">
@@ -47,10 +48,12 @@
         </div>
         <div class="home-nav">
         	<div class="home-nav-indep">
-        		<img src="./img/hot.png" alt="">
-        		<p>
-        			低价拼团
-        		</p>
+                <a v-link="{ name: 'list', params: {cateid: -1} }">
+            		<img src="./img/hot.png" alt="">
+            		<p>
+            			低价拼团
+            		</p>
+                </a>
         	</div>
         	<div class="home-nav-other">
 
@@ -120,35 +123,42 @@
                 <template v-for="product in productList">
                     <template v-if="product.isCanGroup==1">
 
-                        <group-item :product="product"></group-item>
+                        <a v-link="{ name: 'group-detail', params: { goodId: product.goodsId}}">
+                            <group-item :product="product"></group-item>
+                        </a>
                         
                     </template>
                     <template v-else>
-                        <div class="home-list-content-item">
-                            <img :src="product.img | handleImg" alt="">
-                            <div class="home-list-content-item-info">
-                                <h3>{{product.title}}</h3>
-                                <p class="desc">
-                                    {{product.subTitle}}
-                                </p>
-                                <p>
-                                    <span class="now">
-                                        ￥{{product.price}}
-                                    </span>
-                                    <span class="old">
-                                        ￥{{product.marketPrice}}
-                                    </span>
-                                </p>
-                                <p>
-                                    <span class="sum">已售{{product.saleNum}}份</span>
-                                    <span class="buy">
-                                        <b class="reduce">-</b>
-                                        <var>0</var>
-                                        <b class="add active">+</b>
-                                    </span>
-                                </p>
-                            </div>
-                        </div>
+                        <a v-link="{ name: 'detail', params: { goodId: product.goodsId}}">
+
+                            <general-item :product="product"></general-item>
+
+                         <!-- <div class="home-list-content-item">
+                                <img :src="product.img | handleImg" alt="">
+                                <div class="home-list-content-item-info">
+                                    <h3>{{product.title}}</h3>
+                                    <p class="desc">
+                                        {{product.subTitle}}
+                                    </p>
+                                    <p>
+                                        <span class="now">
+                                            ￥{{product.price}}
+                                        </span>
+                                        <span class="old">
+                                            ￥{{product.marketPrice}}
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="sum">已售{{product.saleNum}}份</span>
+                                        <span class="buy">
+                                            <b class="reduce">-</b>
+                                            <var>0</var>
+                                            <b class="add active">+</b>
+                                        </span>
+                                    </p>
+                                </div>
+                                                 </div>  -->
+                        </a>
                     </template>
                 </template>
                 
@@ -178,9 +188,7 @@
                     </div>
                 </div> -->
         	</div>
-        	
         </div>
-
         <div class="home-oper">
         	<div class="home-oper-item">
         		<div class="img-wrap">
@@ -216,6 +224,12 @@ import util from '../../libs/util.js'
 
 import groupItem from '../Common/GroupItem.vue'
 
+import generalItem from '../Common/GeneralItem.vue'
+
+import { changeGroupbuyid } from '../../vuex/actions.js'
+
+import { groupbuyid } from '../../vuex/getters.js'
+
 export default {
     name: 'home',
     data() {
@@ -227,6 +241,17 @@ export default {
             timeDefault: true,
             productList:[]
     	}
+    },
+    vuex: {
+        actions: {
+            changeGroupbuyid
+        },
+        getters: {
+            groupbuyid
+        }
+    },
+    ready(){
+        console.log(changeGroupbuyid)
     },
     filters:{
         handleImg: util.handleImg
@@ -278,16 +303,31 @@ export default {
     },
     methods: {
         selectTime(time) {
-            this.selectedTime = time
+            this.selectedTime = time;
+            this.changeGroupbuyid(time.groupbuyId);
+            this.getRecommendInfoById(time.groupbuyId);
             this.timeDefault = true
         },
         spread() {
             this.timeDefault = false
+        },
+        getRecommendInfoById(id) {
+            this.$http.jsonp("getRecommendInfo", { params: {
+                groupbuyId: id,
+                pageNo:1,
+                pageSize:30
+            }}).then(response => {
+                if(response.data.respCode == 0){
+                    this.productList = response.data.respData
+                }
+            })
         }
+
     },
     components: {
         swiper,
-        groupItem
+        groupItem,
+        generalItem
     }
 }
 </script>

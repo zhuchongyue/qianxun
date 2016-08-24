@@ -1,4 +1,8 @@
 
+export const groupbuyid = state => {
+	return state.cart.groupbuyid
+}
+
 export const addrMaps = state => {
 	return state.address.addrMap
 }

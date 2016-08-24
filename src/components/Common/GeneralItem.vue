@@ -17,9 +17,9 @@
 			<p>
 				<span class="sum">已收{{ product.saleNum }}份</span>
 				<span class="buy">
-					<b class="reduce">-</b>
-					<var>0</var>
-					<b class="add active">+</b>
+					<b class="reduce" @click="reduceCount($event)">-</b>
+					<var>{{count}}</var>
+					<b class="add active" @click="addCount($event)">+</b>
 				</span>
 			</p>
 		</div>
@@ -31,13 +31,43 @@
 <script>
 	import util from '../../libs/util.js'
 
+	import { changeGroupbuyid, addGoods } from '../../vuex/actions.js'
+
+	import { groupbuyid } from '../../vuex/getters.js'
+
 	export default {
 		name: 'GeneralItem',
+
+		data() {
+			return {
+				count: 0
+			}
+		},
 
 		filters:{
 			handleImg: util.handleImg
 		},
-
+		methods: {
+			reduceCount(e){
+				if(this.count>0){
+					this.count--;
+				}
+				e.preventDefault();
+			},
+			addCount(e) {
+				this.count++
+				e.preventDefault()
+			},
+		},
+		vuex: {
+			actions: {
+				changeGroupbuyid,
+				addGoods
+			},
+			getters: {
+				groupbuyid
+			}
+		},
 		props: ['product']
 	}
 

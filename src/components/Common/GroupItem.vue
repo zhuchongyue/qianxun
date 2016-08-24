@@ -1,8 +1,8 @@
 <template>
 	<a href="/" class="group-wrap">
-		<div class="group" href="">
+		<div class="group-item" href="">
 			<img :src="product.img | handleImg"/>
-			<div class="group-info">
+			<div class="group-item-info">
 				<h3>{{product.title}}</h3>
 				<p class="desc">{{product.subTitle}}</p>
 				<p class="oldpri">￥{{product.price}}</p>

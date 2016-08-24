@@ -102,7 +102,7 @@
 				<div class="delivery-oper-all-word">
 					共<span>￥177</span>
 				</div>
-				<div class="delivery-oper-all-summary">
+				<div @click="createOrder" class="delivery-oper-all-summary">
 					支付订单
 				</div>
 			</div>
@@ -116,5 +116,67 @@
 <script>
 	export default {
 		name:'delivery',
+		data() {
+			return {
+				submitInfo: {}
+			}
+		},
+
+		route: {
+			data(){
+				var goods =  JSON.stringify([{"goodsId": 38, "number": 3},{"goodsId": 14,"number": 1}]);
+
+				this.$http.jsonp("submitOrder",{
+					params: {
+						goods,
+						groupbuyId: 1
+					}
+				}).then(response => {
+					if(response.data.respCode == 0) {
+						this.submitInfo = response.data.respData
+					}
+				});
+			}
+		},
+		methods:{
+			createOrder() {
+
+				var goods =  JSON.stringify([{"goodsId": 38, "number": 3},{"goodsId": 14,"number": 1}]);
+
+				this.$http.jsonp("addOrder", {
+					params: {
+						buyWay: 1,
+						buyerName: "朱崇跃",
+						buyerMobile: "18612782819",
+						groupbuyId: 1,
+						payWay: 1,
+						goods,
+						ticketId: 0,
+						address:"北京北京"
+					}
+				}).then( response => {
+					if(response.data.respCode == 0) {
+
+						var config = response.data.respData;
+						wx.ready( () => {
+							wx.chooseWXPay({
+								appId : config.appId,
+								timestamp : config.timeStamp,
+								nonceStr : config.nonceStr,
+								package : config.packageSign,
+								signType : config.signType,
+								paySign : config.paySign,
+								success(res){
+									alert(JSON.stringify(res))
+								},
+								cancel : function(res){
+									alert('cancel')
+								}
+							})
+						})
+					}
+				})
+			}
+		}
 	}
 </script>

@@ -17,6 +17,16 @@
 		store,
 
 		ready(){
+
+			var _this = this;
+			_this.wxConfig();
+
+			/*wx.error(function(res){
+			     _this.wxConfig();
+			});
+			wx.ready(function () {
+			    wx.hideOptionMenu();
+			})*/
 			/*
 			https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
 
@@ -75,13 +85,31 @@
 					})*/
 				}
 			}
-
-
-			
-
-			
-		
 		},
+
+		methods: {
+			wxConfig (){
+			  
+			  this.$http.jsonp("getInviteShare",{
+			  	params: {
+			  		url : location.origin + location.pathname + location.search
+			  		}
+			  	}).then((response) => {
+			      if(response.data.respCode == 0){
+
+			          var conf = response.data.respData;
+			          wx.config({
+			                 debug: true,
+			                 appId: conf.appId, 
+			                 timestamp: conf.timestamp, 
+			                 nonceStr: conf.noncestr, 
+			                 signature: conf.signature,
+			                 jsApiList: ['getLocation','chooseWXPay','hideOptionMenu']
+			          });
+			      }
+			  });
+			}
+		}
 	}
 
 </script>

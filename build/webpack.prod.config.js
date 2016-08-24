@@ -11,7 +11,7 @@ module.exports = merge(baseWebpackConfig,{
     devtool : '#source-map',
     output : {
         path : './dist',
-        publicPath : 'http://j2.58cdn.com.cn/zhuanzhuan/wbapp/',
+        publicPath : '/',
         filename : 'static/[name].[chunkhash:7].js',
         chunkFilename : 'static/[id].[chunkhash:7].js'
     },

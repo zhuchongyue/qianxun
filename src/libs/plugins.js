@@ -22,11 +22,11 @@ var plugin = {
 	},
 	resourceGlobalSetting() {
 
-		if(process.env.NODE_ENV !== 'production') {
+		//if(process.env.NODE_ENV !== 'production') {
 			Vue.http.options.root = "http://www-test.qx-llt.com/transfer";
-		}else{
+		/*}else{
 			Vue.http.options.root = "http://www.qx-llt.com/transfer";
-		}
+		}*/
 
 	},
 	runRouter() {
@@ -34,7 +34,7 @@ var plugin = {
 		var router = this.router = new Router({
 			/*hashbang : false,
 			history : true,*/
-			root : '/'
+			root : '/test'
 		});
 
 		router.beforeEach(this.beforeEach.bind(router));
@@ -64,13 +64,13 @@ var plugin = {
 					require(['../components/Delivery/Delivery.vue'], resolve);
 				}
 			},
-			'/detail': {
+			'/detail/:goodId': {
 				name: 'detail', //普通商品详情页
 				component (resolve) {
 					require(['../components/Detail/Detail.vue'], resolve);
 				}
 			},
-			'/gdetail': {        
+			'/gdetail/:goodId': {        
 				name: 'group-detail',   //团购详情页
 				component (resolve) {
 					require(['../components/GroupDetail/GroupDetail.vue'], resolve);
