@@ -122,43 +122,10 @@
         	<div class="home-list-content">
                 <template v-for="product in productList">
                     <template v-if="product.isCanGroup==1">
-
-                        <a v-link="{ name: 'group-detail', params: { goodId: product.goodsId}}">
-                            <group-item :product="product"></group-item>
-                        </a>
-                        
+                        <group-item :product="product"></group-item>
                     </template>
                     <template v-else>
-                        <a v-link="{ name: 'detail', params: { goodId: product.goodsId}}">
-
-                            <general-item :product="product"></general-item>
-
-                         <!-- <div class="home-list-content-item">
-                                <img :src="product.img | handleImg" alt="">
-                                <div class="home-list-content-item-info">
-                                    <h3>{{product.title}}</h3>
-                                    <p class="desc">
-                                        {{product.subTitle}}
-                                    </p>
-                                    <p>
-                                        <span class="now">
-                                            ￥{{product.price}}
-                                        </span>
-                                        <span class="old">
-                                            ￥{{product.marketPrice}}
-                                        </span>
-                                    </p>
-                                    <p>
-                                        <span class="sum">已售{{product.saleNum}}份</span>
-                                        <span class="buy">
-                                            <b class="reduce">-</b>
-                                            <var>0</var>
-                                            <b class="add active">+</b>
-                                        </span>
-                                    </p>
-                                </div>
-                                                 </div>  -->
-                        </a>
+                        <general-item :product="product"></general-item>
                     </template>
                 </template>
                 
@@ -226,7 +193,7 @@ import groupItem from '../Common/GroupItem.vue'
 
 import generalItem from '../Common/GeneralItem.vue'
 
-import { changeGroupbuyid } from '../../vuex/actions.js'
+import { changeGroupbuyid, clearGoods } from '../../vuex/actions.js'
 
 import { groupbuyid } from '../../vuex/getters.js'
 
@@ -244,14 +211,14 @@ export default {
     },
     vuex: {
         actions: {
-            changeGroupbuyid
+            changeGroupbuyid,
+            clearGoods
         },
         getters: {
-            groupbuyid
+            groupbuyid,
         }
     },
     ready(){
-        console.log(changeGroupbuyid)
     },
     filters:{
         handleImg: util.handleImg
@@ -284,8 +251,6 @@ export default {
                         return value
                     })
 
-                    console.log(this.banners)
-
                 }
             });
 
@@ -306,7 +271,8 @@ export default {
             this.selectedTime = time;
             this.changeGroupbuyid(time.groupbuyId);
             this.getRecommendInfoById(time.groupbuyId);
-            this.timeDefault = true
+            this.timeDefault = true;
+            this.clearGoods();
         },
         spread() {
             this.timeDefault = false

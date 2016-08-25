@@ -18,38 +18,14 @@
 
 		ready(){
 
-			var _this = this;
+			/*var _this = this;
 			_this.wxConfig();
-
-			/*wx.error(function(res){
-			     _this.wxConfig();
-			});
-			wx.ready(function () {
-			    wx.hideOptionMenu();
-			})*/
-			/*
-			https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
-
-			wx8031d15a06d4a296
-
-			*/
-			/*this.$http.jsonp("getInviteShare", { params: {
-					url: window.location.href
-				}
-			}).then(response => {
-				console.log(response)
-			})*/
-
 
 			if(!localStorage.getItem("userInfo")) {
 				if(document.location.search.indexOf("code=") == -1) {
 					
 
 					window.location = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8031d15a06d4a296&redirect_uri=${encodeURIComponent(window.location.href)}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
-
-
-					
-					//https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
 				}
 
 				if( document.location.search.indexOf("code=") > 0) {
@@ -72,19 +48,9 @@
 						}
 					})
 
-					//获取openid
-					/*this.$http.jsonp("https://api.weixin.qq.com/sns/oauth2/access_token", {
-						params: {
-							appid: "wx8031d15a06d4a296",
-							secret: "SECRET",
-							code: this.$route.query.code,
-							grant_type: "authorization_code"
-						}
-					}).then( response => {
-						
-					})*/
+				
 				}
-			}
+			}*/
 		},
 
 		methods: {

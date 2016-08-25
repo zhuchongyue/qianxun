@@ -9,5 +9,7 @@ export const addGoods = ( { dispatch }, good) => {
 	dispatch(types.ADD_GOODS, good)
 }
 
-
+export const clearGoods = ( { dispatch }) => {
+	dispatch(types.CLEAR_GOODS)
+}
 

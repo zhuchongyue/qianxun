@@ -62,8 +62,22 @@ import GeneralItem from '../Common/GeneralItem.vue'
 
 import GroupItem from '../Common/GroupItem.vue'
 
+
+import { changeGroupbuyid, addGoods } from '../../vuex/actions.js'
+
+import { groupbuyid, allGoods } from '../../vuex/getters.js'
+
+
 export default {
     name: 'home',
+    vuex: {
+      getters: {
+        allGoods
+      }
+    },
+    ready(){
+      console.log("list len --> " + this.allGoods.length)
+    },
     data(){
       return {
         productList: [],

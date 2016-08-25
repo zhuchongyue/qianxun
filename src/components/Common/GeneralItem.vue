@@ -1,4 +1,5 @@
 <template>
+<a v-link="{ name: 'detail', params: { goodId: product.goodsId}}">
 	<div class="mod-item">
 		<img :src="product.img | handleImg" alt="">
 		<div class="mod-item-info">
@@ -24,6 +25,7 @@
 			</p>
 		</div>
 	</div>
+	</a>
 </template>
 <style lang="less">
 	@import 'GeneralItem.less';
@@ -31,9 +33,11 @@
 <script>
 	import util from '../../libs/util.js'
 
+	import _ from "underscore"
+
 	import { changeGroupbuyid, addGoods } from '../../vuex/actions.js'
 
-	import { groupbuyid } from '../../vuex/getters.js'
+	import { groupbuyid, allGoods } from '../../vuex/getters.js'
 
 	export default {
 		name: 'GeneralItem',
@@ -52,12 +56,30 @@
 				if(this.count>0){
 					this.count--;
 				}
+
+				this.addGoods({
+					product: this.product,
+					count: this.count
+				})
 				e.preventDefault();
 			},
 			addCount(e) {
-				this.count++
+				this.count++;
+				this.addGoods({
+					product: this.product,
+					count: this.count
+				})
 				e.preventDefault()
 			},
+		},
+		ready(){
+
+
+			for(let i=0; i<this.allGoods.length; i++){
+				if(_.isEqual(this.allGoods[i].product.goodsId, this.product.goodsId)) {
+					this.count = this.allGoods[i].count
+				}
+			}
 		},
 		vuex: {
 			actions: {
@@ -65,7 +87,8 @@
 				addGoods
 			},
 			getters: {
-				groupbuyid
+				groupbuyid,
+				allGoods
 			}
 		},
 		props: ['product']

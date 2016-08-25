@@ -1,5 +1,5 @@
 <template>
-	<a href="/" class="group-wrap">
+	<a v-link="{ name: 'group-detail', params: { goodId: product.goodsId}}">
 		<div class="group-item" href="">
 			<img :src="product.img | handleImg"/>
 			<div class="group-item-info">
