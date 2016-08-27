@@ -32,7 +32,7 @@
 
   	<div class="list-oper">
   		<div class="list-oper-empty">
-  			<div class="list-oper-empty-car">
+  			<div v-show="!showCartMask" class="list-oper-empty-car" @click="showCart">
   				<img src="../Common/img/car.png" alt="">
   			</div>
   			<!-- <div class="list-oper-empty-word">
@@ -49,7 +49,10 @@
   			</div>
   		</div>
   	</div>
+
   </div>
+    <cart-mask></cart-mask>
+
 </template>v ;/
 <style lang="less">
     @import "List.less";
@@ -62,6 +65,8 @@ import GeneralItem from '../Common/GeneralItem.vue'
 
 import GroupItem from '../Common/GroupItem.vue'
 
+import cartMask from '../Common/cartMask.vue'
+
 import { groupbuyid, allGoods } from '../../vuex/getters.js'
 
 
@@ -72,11 +77,23 @@ export default {
         allGoods
       }
     },
+    methods: {
+      showCart(){
+        this.showCartMask = true;
+        this.$broadcast('show-cart');
+      }
+    },  
     ready(){
     },
     data(){
       return {
         productList: [],
+        showCartMask: false
+      }
+    },
+    events: {
+      'hide-cart':function() {
+        this.showCartMask = false;
       }
     },
     computed: {
@@ -132,6 +149,7 @@ export default {
     components: {
         dateEle: DateEle,
         generalItem: GeneralItem,
-        groupItem: GroupItem
+        groupItem: GroupItem,
+        cartMask
     }
 }

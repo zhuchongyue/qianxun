@@ -162,7 +162,7 @@
         		</div>
         		<p>首页</p>
         	</div>
-        	<div class="home-oper-item home-oper-center">
+        	<div class="home-oper-item home-oper-center" @click="showCart">
         		<div class="img-wrap">
         			<img src="./img/car.png" alt="">
         		</div>
@@ -178,6 +178,7 @@
         	</div>
         </div>
     </div>
+    <cart-mask></cart-mask>
 </template>
 <style lang="less">
     @import "Home.less";
@@ -191,6 +192,8 @@ import util from '../../libs/util.js'
 import groupItem from '../Common/GroupItem.vue'
 
 import generalItem from '../Common/GeneralItem.vue'
+
+import cartMask from '../Common/cartMask.vue'
 
 import { changeGroupbuyid, clearGoods } from '../../vuex/actions.js'
 
@@ -269,6 +272,9 @@ export default {
         }
     },
     methods: {
+        showCart(){
+            this.$broadcast('show-cart');
+        },
         selectTime(time) {
             this.selectedTime = time;
             this.changeGroupbuyid(time.groupbuyId);
@@ -295,7 +301,8 @@ export default {
     components: {
         swiper,
         groupItem,
-        generalItem
+        generalItem,
+        cartMask
     }
 }
 </script>
