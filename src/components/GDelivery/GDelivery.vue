@@ -344,6 +344,7 @@ export default {
 				if(response.data.respCode == 0) {
 
 					var config = response.data.respData;
+					var _this = this;
 					wx.ready( () => {
 						wx.chooseWXPay({
 							appId : config.appId,
@@ -354,6 +355,12 @@ export default {
 							paySign : config.paySign,
 							success(res){
 								alert(JSON.stringify(res))
+								_this.router.go({
+									name: 'gsuccess',
+									params: {
+										orderId: config.orderId
+									}
+								})
 							},
 							cancel : function(res){
 								alert('cancel')

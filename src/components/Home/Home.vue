@@ -115,9 +115,8 @@
         <div class="home-list">
         	<div class="home-list-word">
         		<p></p>
-        		<span>当季热门</span>
+        		<span>热门推荐</span>
         	</div>
-
 
         	<div class="home-list-content">
                 <template v-for="product in productList">

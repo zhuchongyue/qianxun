@@ -96,10 +96,32 @@ export default {
     route: {
       data() {
 
-        this.$http.jsonp("getListInfo", { params: {
-           pageNo:1,
-           pageSize: 20
+        var params = {};
+
+        if(this.cateId > 0 ){
+          params = {
+            pageNo:1,
+            pageSize: 30,
+            categoryId: this.cateId
+          }
+        }else{
+          params = {
+            pageNo:1,
+            pageSize: 30,
+          }
         }
+
+        if(this.cateId == -1) {
+            params = {
+              pageNo:1,
+              pageSize: 30,
+              isGroup: 1
+            }
+        }
+
+
+        this.$http.jsonp("getListInfo", { 
+          params
         }).then(response => {
             if(response.data.respCode == 0) {
               this.productList = response.data.respData

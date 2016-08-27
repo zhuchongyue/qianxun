@@ -6,7 +6,7 @@
                     剩余xx小时xx分xx秒
                 </p>
                 <p>
-                    还差x人组团成功
+                    还差{{ successInfo.remPerson }}人组团成功
                 </p>
                 <p>
                     快去邀请更多小伙伴吧 
@@ -21,7 +21,7 @@
             <div class="gsuccess-info-item">
                 <p>
                     <span class="title">
-                        日本进口草莓_500g 
+                        {{ successInfo.title }}
                     </span>
                     <span class="count">
                         X5
@@ -29,11 +29,11 @@
                 </p>
                 <p class="detail">
                     <span class="number">
-                        10人组团
+                        {{ successInfo.groupPerson }}人组团
                     </span>
                     &nbsp;&nbsp;
                     <span class="price">
-                        ￥59.9
+                        ￥{{ successInfo.price }}
                     </span>
                 </p>
             </div>
@@ -46,14 +46,14 @@
         			邀请好友
         		</p>
         		<p>
-        			TA得<i>7</i>元，你得<i>7</i>元
+        			TA得<i>{{ successInfo.inviteMoney }}</i>元，你得<i>{{ successInfo.invitedMoney }}</i>元
         			<span>&nbsp;&nbsp;邀请</span>
         		</p>
         		<div class="gsuccess-invite-coupons">
         			<p class="img-wrap">
         				<img src="./img/coupons.png" alt="">
         				<span>
-        					<var>8</var>
+        					<var>{{ successInfo.invitedMoney }}</var>
         					<i>元</i>
         				</span>
         			</p>
@@ -76,7 +76,45 @@ export default {
     name: 'gsuccess',
     data(){
         return {
-            showMask: true
+            showMask: true,
+            successInfo: {}
+        }
+    },
+    ready(){
+        var link = "http://www.qx-llt.com/test/?wx=true#!/"
+
+        var _this = this;
+        wx.ready(function(){
+            wx.onMenuShareTimeline({
+                title: '千寻邻里团', // 分享标题
+                link: link, // 分享链接
+                imgUrl: "http://static.qx-llt.com/images/upload/20160519/27203415ac344c70be3a115b883730a5.jpg", // 分享图标
+                success: function () { 
+                    _this.showMask = false;
+                    alert('分享成功！')
+                },
+                cancel: function () {
+                    _this.showMask = false;
+                    alert('取消失败！')
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        })
+    },
+    computed: {
+        orderId() {
+            return this.$route.params.orderId;
+        }
+    },
+    route: {
+        data() {
+            this.$http.jsonp("orderSuccess", { params : {
+                orderId: this.orderId
+            }}).then(response => {
+                if(0 == response.data.respCode ) {
+                    this.successInfo = response.data.respData
+                }
+            })
         }
     },
     methods: {
