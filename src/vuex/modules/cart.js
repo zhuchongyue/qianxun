@@ -12,14 +12,15 @@ import {
 import _ from 'underscore';
 
 const state = {
-	groupbuyid: 0,
+	groupbuyid: parseInt(sessionStorage.getItem("groupbuyid")) || 0,
 	goods: JSON.parse(sessionStorage.getItem("goods")) || []
 }
 
 const mutations = {
 
 	CHANGE_GROUPBUYID (state, id) {
-		state.groupbuyid = id
+		state.groupbuyid = id;
+		sessionStorage.setItem("groupbuyid", id);
 	},
 	ADD_GOODS (state, good) {
 

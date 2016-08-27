@@ -43,9 +43,8 @@
 	}
 
 	&-addr {
-		margin-top: 10 * @px;
+		/* margin-top: 10 * @px; */
 		border-bottom: 1px solid @bottom;
-		
 
 		&-tap {
 			background-color: #fff;
@@ -53,6 +52,11 @@
 			text-align: center;
 			color: @gray;
 			padding: 10 * @px 0;
+			font-size: 24 * @px;
+
+			.selected {
+				color: rgb( 0, 180, 255 );
+			}
 
 			&-select {
 				flex: 1;
@@ -62,12 +66,182 @@
 				flex: 1;
 				padding: 10 * @px 0;
 				border-left: 1px solid @split;
+
+
 			}
 		}
 
 		&-info {
 			margin-top: 10 * @px;
 			background-color: #fff;
+
+			&-select {
+				&-item {
+					display: flex;
+					border-bottom: 1px solid @split;
+
+					&-hint {
+						font-size: 22*@px;
+						color: rgb( 102, 102, 102 );
+						width: 200 * @px;
+						text-align: right;
+						padding-right: 10 * @px;
+
+						&>p {
+							height: 60 * @px;
+							line-height: 60 * @px;
+						}
+					}
+
+					&-value {
+						flex: 1;
+						font-size: 22*@px;
+						color: rgb( 23, 23, 23 );
+
+
+						&>div {
+							height: 60 * @px;
+							line-height: 60 * @px;
+							border-bottom: 1px solid @split;
+
+							&:last-child {
+								border-bottom: 0;
+							}
+						}
+
+						input {
+							border: 0;
+							outline: none;
+						}
+						
+					}
+				}
+
+				&-time {
+					font-size: 22*@px;
+					color: rgb( 102, 102, 102 );
+					text-indent: 110 * @px;
+					padding: 15 * @px 0;
+				}
+			}
+
+			&-location {
+				display: flex;
+				font-size: 22*@px;
+				color: rgb( 102, 102, 102 );
+
+				p {
+					width: 130 * @px;
+					padding: 15 * @px 30 * @px 15 * @px 0; 
+					text-align: right;
+				}
+
+				&-wrap {
+					flex: 1;
+
+					.right {
+						float: right;
+					}
+				}
+
+				&-city {
+					padding: 15 * @px 30 * @px 15 * @px 0; 
+					border-bottom: 1px solid @split;
+				}
+
+				&-area {
+					padding: 15 * @px 30 * @px 15 * @px 0;
+					text-align: right;
+				}
+
+				
+			}
+		}
+
+		&-new {
+			margin-top: 10 * @px;
+			background-color: #fff;
+
+			&-item {
+				display: flex;
+				border-bottom: 1px solid @split;
+				&-hint {
+					font-size: 22*@px;
+					color: rgb( 102, 102, 102 );
+					width: 200 * @px;
+					text-align: right;
+					padding-right: 10 * @px;
+
+					&>p {
+						height: 60 * @px;
+						line-height: 60 * @px;
+					}
+				}
+
+				&-value {
+					flex: 1;
+					font-size: 22*@px;
+					color: rgb( 23, 23, 23 );
+
+
+					&>div {
+						height: 60 * @px;
+						line-height: 60 * @px;
+						border-bottom: 1px solid @split;
+
+						&:last-child {
+							border-bottom: 0;
+						}
+					}
+
+					input {
+						border: 0;
+						outline: none;
+					}
+				}
+			}
+
+			&-own {
+				display: flex;
+				border-bottom: 1px solid @split;
+
+
+				p {
+					  font-size: 22*@px;
+					  color: rgb( 102, 102, 102 );
+					  padding: 15 * @px 0;
+					  width: 200 * @px;
+					  padding-right: 10 * @px;
+					  text-align: right;
+				}
+
+				&-location {
+					flex: 1;
+
+				}
+
+				&-info{
+					  font-size: 22*@px;
+					  color: rgb( 23, 23, 23 );
+					  padding: 15 * @px 0;
+					  font-weight: bold;
+					  border-bottom: 1px solid @split;
+				}
+
+				&-detail {
+					  font-size: 22*@px;
+					  color: rgb( 23, 23, 23 );
+					  padding: 15 * @px 0;
+
+				}
+			}
+
+			&-all {
+				  font-size: 22*@px;
+				  text-align: center;
+				  color: rgb( 126, 126, 126 );
+				padding: 15 * @px 0;
+			}
 		}
 
 	}
@@ -112,6 +286,7 @@
 		color: rgb( 23, 23, 23 );
 		font-size: 24 * @px;
 		overflow: hidden;
+		margin-bottom: 100 * @px;
 
 		img {
 			width: 45 * @px;
@@ -137,6 +312,8 @@
 
 		&-item {
 			display: flex;
+
+
 
 			&-info {
 				flex: 1;

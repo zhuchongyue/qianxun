@@ -14,7 +14,7 @@
 				</span>
 			</p>
 			<h3>
-				美国进口樱桃
+				{{detail.title}}
 			</h3>
 			<ul>
 				<li>新鲜采摘绝无农药无农药</li>
@@ -33,7 +33,7 @@
 				</span>
 			</div>
 			<p class="group-infos-specific">
-				支付开团并邀请4个成团，人数不足自动退款，团长指定送货时间以及提货地点 
+				支付开团并邀请{{detail.groupPerson}}个成团，人数不足自动退款，团长指定送货时间以及提货地点 
 			</p>
 		</div>
 
@@ -89,19 +89,19 @@
 		<div class="group-intro">
 			
 			<div class="group-intro-tap">
-				<div class="group-intro-tap-item  selected">
+				<div class="group-intro-tap-item" @click="selectTap(1)" :class="{selected: tapIndex == 1}">
 					规格
 				</div>
-				<div class="group-intro-tap-item split">
+				<div class="group-intro-tap-item split" @click="selectTap(2)" :class="{selected: tapIndex == 2}">
 					图文详情
 				</div>
-				<div class="group-intro-tap-item split">
+				<div class="group-intro-tap-item split" @click="selectTap(3)" :class="{selected: tapIndex == 3}">
 					拼团玩法
 				</div>
 			</div>
 
 			<div class="group-intro-contents">
-				<div class="group-intro-contents-spec none">
+				<div class="group-intro-contents-spec" :class="{none : tapIndex != 1}">
 					<p>
 						<span class="name">
 							商品名称
@@ -154,7 +154,7 @@
 
 					</p>
 				</div>
-				<div class="group-intro-contents-detail none">
+				<div class="group-intro-contents-detail" :class="{none : tapIndex != 2}">
 
 					<div class="img-wrap">
 						<img src="./img/banner.png" alt="">
@@ -211,7 +211,7 @@
 
 					</p>
 				</div>
-				<div class="group-intro-contents-rule">
+				<div class="group-intro-contents-rule" :class="{none : tapIndex != 3}">
 					<img src="./img/progrss.png" alt="">
 				</div>
 			</div>
@@ -257,19 +257,38 @@
 		name: 'group-detail',
 		data() {
 			return {
-				banners:[
-					{img: './img/banner.png'},
-					{img: './img/banner.png'},
-					{img: './img/banner.png'},
-				],
+				tapIndex: 1,
 				detail: {}
+			}
+		},
+		computed: {
+			groupGoodsId() {
+				return this.$route.params.goodId;
+			},
+			banners() {
+
+				if(this.detail.imgs){
+					return this.detail.imgs.map(value => {
+						return {
+							img: value
+						}
+					})
+				}else{
+					return []
+				 
+				}
+			}
+		},
+		methods:{
+			selectTap(tapIndex) {
+				this.tapIndex = tapIndex
 			}
 		},
 		route: {
 			data() {
 				this.$http.jsonp("getGoodsInfo", {
 					params: {
-						groupGoodsId: 2
+						groupGoodsId: this.groupGoodsId
 					}
 				}).then(response => {
 					if(response.data.respCode == 0 ){

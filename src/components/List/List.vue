@@ -27,11 +27,7 @@
 
           </template>
       </template>
-  		<!--
-      groupItem
-      <general-item></general-item>
-      <general-item></general-item>
-      <general-item></general-item> -->
+  	
   	</div>
 
   	<div class="list-oper">
@@ -39,12 +35,16 @@
   			<div class="list-oper-empty-car">
   				<img src="../Common/img/car.png" alt="">
   			</div>
-  			<div class="list-oper-empty-word">
-  				购物车是空的
-  			</div>
+  			<!-- <div class="list-oper-empty-word">
+          购物车是空的
+        </div> -->
+        <div class="list-oper-empty-word">
+          共<span class="sum-price">￥{{ sumPrice }}</span>
+          (满80包邮)
+        </div>
   			<div class="list-oper-empty-summary">
           <a v-link="{name: 'delivery'}">
-  				    结算(0)
+  				    结算({{allGoods.length}})
           </a>
   			</div>
   		</div>
@@ -76,7 +76,6 @@ export default {
       }
     },
     ready(){
-      console.log("list len --> " + this.allGoods.length)
     },
     data(){
       return {
@@ -86,12 +85,19 @@ export default {
     computed: {
       cateId(){
         return this.$route.params.cateid
+      },
+      sumPrice() {
+        var price = 0;
+
+        this.allGoods.forEach(value => {
+          price += parseInt(value.product.price,10) * value.count;
+        })
+
+        return price
       }
     },
     route: {
       data() {
-
-        console.log(this.cateId)
 
         this.$http.jsonp("getListInfo", { params: {
            pageNo:1,

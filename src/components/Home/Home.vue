@@ -229,6 +229,9 @@ export default {
 
                 if(response.data.respCode == 0) {
                     this.times = response.data.respData.times
+
+                    this.changeGroupbuyid(this.times[0].groupbuyId)
+
                     if(process.env.NODE_ENV !== 'production') {
                        this.times = this.times.concat([
                                 {

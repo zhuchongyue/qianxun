@@ -18,7 +18,7 @@
 
 		ready(){
 
-			/*var _this = this;
+			var _this = this;
 			_this.wxConfig();
 
 			if(!localStorage.getItem("userInfo")) {
@@ -36,7 +36,6 @@
 							code: this.$route.query.code
 						}
 					}).then( response => {
-						console.log(response)
 
 						if(response.data.respCode == 0) {
 							localStorage.setItem("userInfo",JSON.stringify(response.data.respData))
@@ -50,7 +49,7 @@
 
 				
 				}
-			}*/
+			}
 		},
 
 		methods: {
