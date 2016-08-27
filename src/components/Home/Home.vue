@@ -9,10 +9,7 @@
                     提货时间:
                 </div>
                 <div class="date date-default">
-                    <!-- <p class="date-item ">
-                        2016年8月1号 星期一
-                        <img src="./img/selected.png" alt="">
-                    </p> -->
+                    
                     <p class="date-item date-selected">
                         {{selectedTime.time}}
                         <img src="./img/selected.png" alt="">
@@ -28,10 +25,7 @@
                     提货时间:
                 </div>
                 <div class="date date-default">
-                    <!-- <p class="date-item date-selected">
-                        2016年8月1号 星期一
-                        <img src="./img/selected.png" alt="">
-                    </p> -->
+                    
                     <p v-for="time in times" @click="selectTime(time)" class="date-item" :class="{ 'date-selected': time.groupbuyId == selectedTime.groupbuyId}">
                        {{ time.time }}
                         <img v-if="time.groupbuyId == selectedTime.groupbuyId" src="./img/selected.png" alt="">

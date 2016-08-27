@@ -177,8 +177,12 @@
 					支付订单
 				</div>
 			</div>
+			<div v-show="!showCartMask" class="delivery-oper-car" @click="showCart">
+				<img src="../Common/img/car.png" alt="">
+			</div>
 		</div>
 	</div>
+	<cart-mask></cart-mask>
 </template>
 
 <style lang="less">
@@ -191,6 +195,8 @@ import { groupbuyid, allGoods } from '../../vuex/getters.js'
 
 import { changeGroupbuyid, addGoods } from '../../vuex/actions.js'
 
+import cartMask from '../Common/cartMask.vue'
+
 export default {
 	name:'delivery',
 	data() {
@@ -202,8 +208,17 @@ export default {
 			addresses:[{}],
 			selectedAddressIndex:0,
 			account:{},
-			buyWay:1
+			buyWay:1,
+			showCartMask: false,
 		}
+	},
+	components: {
+		cartMask
+	},
+	events: {
+	  'hide-cart':function() {
+	    this.showCartMask = false;
+	  }
 	},
 	vuex: {
 	  getters: {
@@ -302,6 +317,10 @@ export default {
 		}
 	},
 	methods:{
+		showCart(){
+		  this.showCartMask = true;
+		  this.$broadcast('show-cart');
+		},
 		createOrder() {
 
 			var goods =  JSON.stringify([{"goodsId": 38, "number": 3},{"goodsId": 14,"number": 1}]);
