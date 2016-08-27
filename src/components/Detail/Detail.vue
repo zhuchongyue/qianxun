@@ -19,31 +19,30 @@
 				</span>
 			</p>
 			<div class="detail-infos-tag">
-				<span>
+				<span v-if="detail.isExpress==1">
 					<img src="./img/selected.png" alt="">
 					快递
 				</span>
-				<span>
+				<span v-if="detail.isZiti==1">
 					<img src="./img/selected.png" alt="">自提
 				</span>
-				<span>
+				<span v-if="detail.isDay==1">
 					<img src="./img/selected.png" alt="">当日采摘
 				</span>
 			</div>
 			<p class="detail-infos-invite">
-				<a href="">
-					邀请好友立减15元
+				<a v-link="{ name: 'invite' }">
+					邀请好友立减{{ detail.inviteMoney }}元
 					<img src="../Common/img/arrow_grap.png" alt="">
 				</a>
 			</p>
-			<ul>
-				<li>新鲜采摘绝无农药无农药</li>
-				<li>新鲜采摘绝无农药无农新鲜采摘绝无农药无农</li>
+			<ul v-for="desc in detail.goodsDesc">
+				<li>{{ desc }}</li>
 			</ul>
-			
+
 		</div>
 		<div class="detail-intro">
-			
+
 			<div class="detail-intro-tap">
 				<div class="detail-intro-tap-item" @click="selectTap(1)" :class="{ 'selected': tapIndex == 1 }">
 					规格
@@ -51,7 +50,7 @@
 				<div class="detail-intro-tap-item split" @click="selectTap(2)" :class="{ 'selected': tapIndex == 2 }">
 					图文详情
 				</div>
-				
+
 			</div>
 
 			<div class="detail-intro-contents">
@@ -66,7 +65,7 @@
 							{{ rule.value }}
 						</span>
 					</p>
-					
+
 
 				</div>
 				<div class="detail-intro-contents-detail" v-else>
@@ -83,7 +82,7 @@
 						</span>
 					</p>
 				</div>
-				
+
 			</div>
 		</div>
 
@@ -155,7 +154,7 @@
 					})
 				}else{
 					return []
-				 
+
 				}
 			}
 		},
