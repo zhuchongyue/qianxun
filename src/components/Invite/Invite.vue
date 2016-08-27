@@ -3,28 +3,28 @@
     	<div class="invite-top">
     		<img src="../Common/img/invite.png" alt="" />
     		<p>
-    			邀请好友，免费送TA一张<i>7</i>元优惠券
+    			邀请好友，免费送TA一张<i>{{ invite.invitedMoney }}</i>元优惠券
     		</p>
     		<p>
     		如果TA进行了消费
     		</p>
     		<p>
-    		订单完成后，你也得到一张<i>7</i>元优惠券
+    		订单完成后，你也得到一张<i>{{ invite.inviteMoney }}</i>元优惠券
  			</p>
     	</div>
 
     	<div class="invite-info">
-    		<img src="../Common/img/avatar.png" alt="">
+    		<img v-bind:src="invite.pic" alt="">
     		<div class="invite-info-sum">
     			<div class="invite-info-sum-down">
     				<p class="line"></p>
     				<p>已邀请好友</p>
-    				<var>7</var>
+    				<var>{{ invite.personNum }}</var>
     			</div>
     			<div class="invite-info-sum-gain">
     			<p class="line"></p>
     				<p>得到优惠券</p>
-    				<var>7</var>
+    				<var>{{ invite.cardNum }}</var>
     			</div>
     		</div>
     	</div>
@@ -33,7 +33,7 @@
     		<p class="img-wrap">
     			<img src="../Common/img/coupons.png" alt="">
     			<span>
-    				<var>8</var>
+    				<var>{{ invite.inviteMoney }}</var>
     				<i>元</i>
     			</span>
     		</p>
@@ -52,5 +52,18 @@
 <script>
 export default {
     name: 'invite',
-    
+    data() {
+			return {
+				invite: {},
+			}
+		},
+    route: {
+      data() {
+        this.$http.jsonp("getInviteDetails").then( response => {
+          if( 0 == response.data.respCode ){
+            this.invite = response.data.respData
+          }
+        })
+      }
+    },
 }

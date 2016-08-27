@@ -10,14 +10,14 @@
                 </div>
                 <div class="date date-default">
                     <!-- <p class="date-item ">
-                        2016年8月1号 星期一 
+                        2016年8月1号 星期一
                         <img src="./img/selected.png" alt="">
                     </p> -->
                     <p class="date-item date-selected">
                         {{selectedTime.time}}
-                        <img src="./img/selected.png" alt=""> 
+                        <img src="./img/selected.png" alt="">
                     </p>
-                  
+
                 </div>
                 <div @click="spread" class="spread">
                     <img src="./img/up.png">
@@ -29,14 +29,14 @@
                 </div>
                 <div class="date date-default">
                     <!-- <p class="date-item date-selected">
-                        2016年8月1号 星期一 
+                        2016年8月1号 星期一
                         <img src="./img/selected.png" alt="">
                     </p> -->
                     <p v-for="time in times" @click="selectTime(time)" class="date-item" :class="{ 'date-selected': time.groupbuyId == selectedTime.groupbuyId}">
                        {{ time.time }}
-                        <img v-if="time.groupbuyId == selectedTime.groupbuyId" src="./img/selected.png" alt=""> 
+                        <img v-if="time.groupbuyId == selectedTime.groupbuyId" src="./img/selected.png" alt="">
                     </p>
-                    
+
                 </div>
                 <div @click="spread" class="spread">
                     <img src="./img/sanjiao.png">
@@ -127,7 +127,7 @@
                         <general-item :product="product"></general-item>
                     </template>
                 </template>
-                
+
         		<!-- <div v-for="var p in length" class="home-list-content-item">
                     <img src="./img/luobo.png" alt="">
                     <div class="home-list-content-item-info">
@@ -137,7 +137,7 @@
                         </p>
                         <p>
                             <span class="now">
-                                ￥28.9    
+                                ￥28.9
                             </span>
                                             <span class="old">
                                                 ￥45.9
@@ -268,7 +268,7 @@ export default {
                 }
             })
 
-           
+
         }
     },
     methods: {
