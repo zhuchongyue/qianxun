@@ -1,5 +1,5 @@
 <template>
-<a v-link="{ name: 'detail', params: { goodId: product.goodsId}}">
+<a v-link="{ name: 'detail', params: { goodId: product.groupbuyGoodsId }}">
 	<div class="mod-item">
 		<img :src="product.img | handleImg" alt="">
 		<div class="mod-item-info">
@@ -59,7 +59,7 @@
 
 				this.addGoods({
 					product: this.product,
-					count: this.count
+					count: -1
 				})
 				e.preventDefault();
 			},
@@ -67,13 +67,12 @@
 				this.count++;
 				this.addGoods({
 					product: this.product,
-					count: this.count
+					count: 1
 				})
 				e.preventDefault()
 			},
 		},
 		ready(){
-
 
 			for(let i=0; i<this.allGoods.length; i++){
 				if(_.isEqual(this.allGoods[i].product.goodsId, this.product.goodsId)) {

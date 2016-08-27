@@ -226,16 +226,16 @@
 	        		<p>首页</p>
 				</a>
 			</div>
-			<div class="group-oper-item group-oper-alone">
-				<a href="">
+			<div class="group-oper-item group-oper-alone" @click="singleAddOrder">
+				<a>
 					<p class="price">
 						￥248
 					</p>
 					单独购买
 				</a>
 			</div>
-			<div class="group-oper-item group-oper-all">
-				<a href="">
+			<div class="group-oper-item group-oper-all" @click="groupAddOrder">
+				<a>
 					<p class="price">
 						￥177
 					</p>
@@ -253,12 +253,19 @@
 
 	import Swiper from '../Swiper/Swiper.vue'
 
+	import { setGroupGood } from '../../vuex/actions.js'
+
 	export default {
 		name: 'group-detail',
 		data() {
 			return {
 				tapIndex: 1,
 				detail: {}
+			}
+		},
+		vuex: {
+			actions: {
+				setGroupGood
 			}
 		},
 		computed: {
@@ -282,6 +289,24 @@
 		methods:{
 			selectTap(tapIndex) {
 				this.tapIndex = tapIndex
+			},
+			singleAddOrder() {
+				this.setGroupGood(this.detail)
+				this.$router.go({
+					name: 'gdelivery',
+					params: {
+						groupway: 1
+					}
+				})
+			},
+			groupAddOrder() {
+				this.setGroupGood(this.detail)
+				this.$router.go({
+					name: 'gdelivery',
+					params: {
+						groupway: 2
+					}
+				})
 			}
 		},
 		route: {

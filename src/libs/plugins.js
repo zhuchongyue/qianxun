@@ -37,7 +37,7 @@ var plugin = {
 			root : '/test'
 		});
 
-		router.beforeEach(this.beforeEach.bind(router));
+		//router.beforeEach(this.beforeEach.bind(router));
 			
 		router.map(routeMap);
 		router.start(App,"#app");
@@ -64,6 +64,12 @@ var plugin = {
 					require(['../components/Delivery/Delivery.vue'], resolve);
 				}
 			},
+			'/gdelivery/:groupway': {   //团购支付页  groupway 1 单独团 2 拼团
+				name: 'gdelivery',
+				component (resolve) {
+					require(['../components/GDelivery/GDelivery.vue'], resolve);
+				}
+			},
 			'/detail/:goodId': {
 				name: 'detail', //普通商品详情页
 				component (resolve) {
@@ -76,13 +82,13 @@ var plugin = {
 					require(['../components/GroupDetail/GroupDetail.vue'], resolve);
 				}
 			},
-			'/success': {
+			'/success/:orderId': {
 				name: 'success',       //普通商品支付成功页
 				component (resolve) {
 					require(['../components/Success/Success.vue'], resolve);
 				}
 			},
-			'/gsuccess': {
+			'/gsuccess/:orderId': {
 				name: 'gsuccess',
 				component (resolve) {  //团购商品支付成功页
 					require(['../components/Gsuccess/Gsuccess.vue'],resolve);
@@ -118,7 +124,7 @@ var plugin = {
 					require(['../components/Invite/Invite.vue'], resolve);
 				}
 			},
-			'ticket': {
+			'ticket': {           //我的优惠券
 				name: 'ticket',
 				component (resolve) {
 					require(['../components/Ticket/Ticket.vue'], resolve);

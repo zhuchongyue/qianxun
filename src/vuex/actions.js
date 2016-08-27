@@ -13,3 +13,11 @@ export const clearGoods = ( { dispatch }) => {
 	dispatch(types.CLEAR_GOODS)
 }
 
+export const setGroupGood = ({ dispatch }, groupGood) => {
+	dispatch( types.SET_GROUP_GOOD, groupGood)
+} 
+
+/*详情页添加good*/
+export const addDetailGood = ({ dispatch }, good) => {
+	dispatch(types.ADD_DETAIL_GOODS, good)
+}

@@ -3,17 +3,17 @@
 		<swiper :list="banners"></swiper>
 		<div class="detail-infos">
 			<h3>
-				美国进口樱桃
+				{{ detail.title}}
 			</h3>
 			<p class="detail-infos-price">
 				<span class="now">
-					￥29.8
+					￥{{ detail.price }}
 				</span>
 				<span class="old">
-					￥35.9
+					￥{{ detail.marketPrice }}
 				</span>
 				<span class="count">
-					<button>
+					<button @click="addCart">
 						加入购物车
 					</button>
 				</span>
@@ -42,136 +42,52 @@
 			</ul>
 			
 		</div>
-
-		
-
 		<div class="detail-intro">
 			
 			<div class="detail-intro-tap">
-				<div class="detail-intro-tap-item  selected">
+				<div class="detail-intro-tap-item" @click="selectTap(1)" :class="{ 'selected': tapIndex == 1 }">
 					规格
 				</div>
-				<div class="detail-intro-tap-item split">
+				<div class="detail-intro-tap-item split" @click="selectTap(2)" :class="{ 'selected': tapIndex == 2 }">
 					图文详情
 				</div>
 				
 			</div>
 
 			<div class="detail-intro-contents">
-				<div class="detail-intro-contents-spec">
-					<p>
+				<div class="detail-intro-contents-spec" v-if="tapIndex == 1">
+
+
+					<p v-for="rule in detail.rules">
 						<span class="name">
-							商品名称
+							{{ rule.name }}
 						</span>
 						<span class="spec">
-							美国进口樱桃
+							{{ rule.value }}
 						</span>
 					</p>
-					<p>
-						<span class="name">商品规格</span>
+					
 
-						<span class="spec">
-							500g
-						</span> 
-						 
-
-					</p>
-					<p>
-						<span class="name">价格</span>
-
-						<span class="spec">
-							29.8元
-						</span> 
-						 
-
-					</p>
-					<p>
-						<span class="name">产地</span>
-
-						<span class="spec">
-							美国
-						</span>
-					</p>
-
-					<p>
-						<span class="name">产品编号</span>
-
-						<span class="spec">
-							12345
-						</span> 
-
-					</p>
-
-					<p>
-						<span class="name">保质期</span>
-
-						<span class="spec">
-							冷藏保存,尽快食用
-						</span> 
-
-					</p>
 				</div>
-				<div class="detail-intro-contents-detail none">
+				<div class="detail-intro-contents-detail" v-else>
 
 					<div class="img-wrap">
-						<img src="./img/banner.png" alt="">
+						<img v-for="img in detail.imgs" :src="img" alt="">
 					</div>
-					<p>
+					<p v-for="rule in detail.rules">
 						<span class="name">
-							商品名称
+							{{ rule.name }}
 						</span>
 						<span class="spec">
-							美国进口樱桃
+							{{ rule.value }}
 						</span>
-					</p>
-					<p>
-						<span class="name">商品规格</span>
-
-						<span class="spec">
-							500g
-						</span> 
-						 
-
-					</p>
-					<p>
-						<span class="name">价格</span>
-
-						<span class="spec">
-							29.8元
-						</span> 
-						 
-
-					</p>
-					<p>
-						<span class="name">产地</span>
-
-						<span class="spec">
-							美国
-						</span>
-					</p>
-
-					<p>
-						<span class="name">产品编号</span>
-
-						<span class="spec">
-							12345
-						</span> 
-
-					</p>
-
-					<p>
-						<span class="name">保质期</span>
-
-						<span class="spec">
-							冷藏保存,尽快食用
-						</span> 
-
 					</p>
 				</div>
 				
 			</div>
 		</div>
 
+		<cart-bar></cart-bar>
 		<!-- <div class="detail-oper">
 			<div class="detail-oper-item detail-oper-home">
 				<a href="">
@@ -198,7 +114,6 @@
 				</a>
 			</div>
 		</div> -->
-
 	</div>
 </template>
 <style lang="less">
@@ -208,34 +123,71 @@
 
 	import Swiper from '../Swiper/Swiper.vue'
 
+	import CartBar from '../Common/CartBar.vue'
+
+	import { addGoods, addDetailGood } from '../../vuex/actions.js'
+
 	export default {
 		name: 'detail',
+		vuex: {
+			actions: {
+				addGoods,
+				addDetailGood
+			}
+		},
 		data() {
 			return {
-				banners:[
-					{img: './img/banner.png'},
-					{img: './img/banner.png'},
-					{img: './img/banner.png'},
-				]
+				tapIndex: 1,
+				detail: {},
+
+			}
+		},
+		computed: {
+			groupGoodsId() {
+				return this.$route.params.goodId;
+			},
+			banners() {
+				if(this.detail.imgs){
+					return this.detail.imgs.map(value => {
+						return {
+							img: value
+						}
+					})
+				}else{
+					return []
+				 
+				}
 			}
 		},
 		route: {
 			data() {
 				this.$http.jsonp("getGoodsInfo", {
 					params: {
-						groupGoodsId: 14
+						groupGoodsId: this.groupGoodsId
 					}
-				})
-
-				this.$http.jsonp("getGoodsInfo", {
-					params: {
-						goodsId: 14
+				}).then( response => {
+					if( 0 == response.data.respCode ){
+						this.detail = response.data.respData
 					}
 				})
 			}
 		},
+		methods: {
+			selectTap(index) {
+				this.tapIndex = index
+			},
+
+			addCart() {
+				this.addGoods({
+					product: this.detail,
+					count: 1
+				})
+				alert('添加购物车成功')
+			},
+		},
 		components:{
-			Swiper
+			Swiper,
+			CartBar
 		}
 	}
 </script>

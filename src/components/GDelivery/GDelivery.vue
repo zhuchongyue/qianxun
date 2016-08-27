@@ -23,71 +23,15 @@
 
 		<div class="delivery-addr">
 			<div class="delivery-addr-tap">
-				<div class="delivery-addr-tap-select" @click="selectDelivery" v-bind:class="{selected: buyWay == 2 }">
-					配送(满80包邮)
+				<div class="delivery-addr-tap-select" @click="selectDelivery" v-bind:class="{selected: buyWay == 1 }">
+					选择现有自提点
 				</div>
-				<div class="delivery-addr-tap-new"    @click="selectNotDelivery" v-bind:class="{selected: buyWay == 1 }">
-					自提(免费)
-				</div>
-			</div>
-			<div v-if="buyWay == 2" class="delivery-addr-info">
-				<div class="delivery-addr-info-select">
-					
-					<div class="delivery-addr-info-select-item">
-						<div class="delivery-addr-info-select-item-hint">
-							<p>收货人</p>
-							<p>电话</p>
-							
-						</div>
-						<div class="delivery-addr-info-select-item-value">
-							<div>
-								<input type="text" v-model="account.buyerMobile">
-							</div>
-							<div>
-								<input type="text" v-model="account.buyerName">
-							</div>
-						</div>
-					</div>
-					<div class="delivery-addr-info-select-time">
-						发货时间 {{submitInfo.getTime}}
-					</div>
-					
-				</div>
-				<div class="delivery-addr-info-location">
-					<p>邮寄地址</p>
-					<div class="delivery-addr-info-location-wrap">
-						<div class="delivery-addr-info-location-city">
-							北京市
-							<span class="right">
-								<select v-model="selectedAreaId" name="" id="">
-									<option v-for="area in areas" v-bind:value="area.id">
-										{{ area.name }}
-									</option>
-								</select>
-							</span>
-						</div>
-						<div class="delivery-addr-info-location-area">
-							朝阳区
-						</div>
-					</div>
+				<div class="delivery-addr-tap-new"    @click="selectNotDelivery" v-bind:class="{selected: buyWay == 2 }">
+					新建自提点
 				</div>
 			</div>
-			<div v-else class="delivery-addr-new">
-				<div class="delivery-addr-new-item">
-					<div class="delivery-addr-new-item-hint">
-						<p>收货人</p>
-						<p>电话</p>
-						
-					</div>
-					<div class="delivery-addr-new-item-value">
-						<div>
-							<input type="text" v-model="account.buyerMobile">
-						</div>
-						<div>
-							<input type="text" v-model="account.buyerName">
-						</div>
-					</div>
-				</div>
+			<div v-if="buyWay == 1" class="delivery-addr-new">
+			
 				<div class="delivery-addr-new-own">
 					<p>
 						选择现有自提点
@@ -106,9 +50,49 @@
 					</div>
 				</div>
 				<div class="delivery-addr-new-all">
-					地址&nbsp;&nbsp;{{ addresses[selectedAddressIndex].name }}
+					地址:&nbsp;&nbsp;{{ addresses[selectedAddressIndex].address }}
 				</div>
 			</div>
+			<div v-else class="delivery-addr-info">
+				<div class="delivery-addr-info-select">
+					
+					<div class="delivery-addr-info-select-item">
+						<div class="delivery-addr-info-select-item-hint">
+							<p>收货人</p>
+							<p>电话</p>
+							
+						</div>
+						<div class="delivery-addr-info-select-item-value">
+							<div>
+								<input type="text" v-model="account.buyerName">
+							</div>
+							<div>
+								<input type="text" v-model="account.buyerMobile">
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				<div class="delivery-addr-info-location">
+					
+					<div class="delivery-addr-info-location-wrap">
+						<div class="delivery-addr-info-location-city">
+							邮寄地址&nbsp;&nbsp;北京市
+							<span class="right">
+								<select v-model="selectedAreaId" name="" id="">
+									<option v-for="area in areas" v-bind:value="area.id">
+										{{ area.name }}
+									</option>
+								</select>
+							</span>
+						</div>
+						<div class="delivery-addr-info-location-area">
+							<input type="text" v-model="detailAddress" placeholder="请输入详细地址">
+						</div>
+					</div>
+				</div>
+			</div>
+			
 		</div>
 
 		<div class="delivery-voucher">
@@ -116,40 +100,26 @@
 		</div>
 		<div class="delivery-list">
 
-			<div v-for="good in allGoods" class="delivery-list-item">
-				<img :src="good.product.img" alt="">
+			<div class="delivery-list-item">
+				<img :src="groupGood.imgs[0]" alt="">
 				<div class="delivery-list-item-info">
-					<h3>{{good.product.title}}</h3>
+					<h3>{{groupGood.title}}</h3>
 					<p class="price">
-						￥{{good.product.price}}
+						￥{{groupGood.price}}
 					</p>
 					<span class="buy">
 						<b @click="reduceCount(good)">-</b>
-						<var>{{good.count}}</var>
+						<var>1</var>
 						<b @click="addCount(good)" class="active">+</b>
 					</span>
 				</div>
 			</div>
-
-			<!-- <div class="delivery-list-item">
-				<img src="./img/luobo.png" alt="">
-				<div class="delivery-list-item-info">
-					<h3>新西南进口胡萝卜</h3>
-					<p class="price">
-						￥29.8
-					</p>
-					<span class="buy">
-						<b>-</b>
-						<var>0</var>
-						<b class="active">+</b>
-					</span>
-				</div>
-			</div> -->
+			
 		</div>
 
 		<div class="delivery-all">
 			<p>
-				优惠<span>5元</span>
+				优惠<span> {{ticket}}元</span>
 			</p>
 			<p>
 				运费<span>
@@ -182,12 +152,12 @@
 </template>
 
 <style lang="less">
-	@import 'Delivery.less';
+	@import 'GDelivery.less';
 </style>
 <script>
 
 
-import { groupbuyid, allGoods } from '../../vuex/getters.js'
+import { groupbuyid, allGoods, groupGood } from '../../vuex/getters.js'
 
 import { changeGroupbuyid, addGoods } from '../../vuex/actions.js'
 
@@ -195,52 +165,88 @@ export default {
 	name:'delivery',
 	data() {
 		return {
-			submitInfo: {},
+			submitInfo: {tickets:[{money:0}]},
 			isDelivery: true, //是否选择配送
 			areas:[],
 			selectedArea:'',
 			addresses:[{}],
 			selectedAddressIndex:0,
 			account:{},
-			buyWay:1
+			buyWay:1,
+			detailAddress: '',
+
 		}
 	},
 	vuex: {
 	  getters: {
 	    allGoods,
-	    groupbuyid
+	    groupbuyid,
+	    groupGood
 	  },
 	  actions: {
-	  	addGoods
+	  	addGoods,
+
 	  }
 	},
 	computed: {
 		sumPrice() {
 			var price = 0;
 
-			this.allGoods.forEach(value => {
-			  price += parseFloat(value.product.price,10) * value.count;
-			})
+			price += parseFloat(this.groupGood.price);
 
-			price+= this.submitInfo.freight
+			price+= this.submitInfo.freight;
+
+			price -= this.ticket;
 
 			return price
 		},
 		freight() {
-			return this.buyWay == 2 ? this.submitInfo.freight : 0;
+			return this.submitInfo.freight;
 		},
-		
+		ticket() {
+			return this.submitInfo.tickets[0].money;
+		},
+		isSingle() {
+			return this.$route.params.groupway == 1 ? true : false
+		}
 	},
 	route: {
 		data(){
 
+			var goods =  JSON.stringify([{ "goodsId": this.groupGood.goodsId, "number": 1 }]);
+
+			var params = {}
+
+			if(this.isSingle) {
+				params = {
+					goods,
+					groupbuyId: this.groupbuyid,
+					isSingle: 1
+				}
+			}else{
+				params = {
+					goods,
+					groupbuyId: this.groupbuyid,
+					teamId: this.groupGood.teamId
+				}
+			}
+
+			this.$http.jsonp("submitOrder",{
+				params
+			}).then(response => {
+				if(response.data.respCode == 0) {
+					this.submitInfo = response.data.respData
+					console.log(this.submitInfo)
+				}
+			});
+
 			this.$http.jsonp("getMyAccount").then(response => {
-				//console.log(response)
 
 				if(0 == response.data.respCode) {
 					this.account = response.data.respData
 				}
-			})
+			});
+
 
 			this.$http.jsonp("getAddress").then(response => {
 				console.log('getAddress')
@@ -248,11 +254,28 @@ export default {
 				if(0 == response.data.respCode) {
 					this.addresses = response.data.respData;
 				}
-			})
+			});
 
+			this.$http.jsonp("getCitys").then(response => {
+				console.log('getCitys')
+				console.log(response)
+			});
+
+			this.$http.jsonp("getAreas",{params: {
+				cityId: 1
+			}}).then(response => {
+				console.log('getAreas')
+				console.log(response)
+				if(0 == response.data.respCode) {
+					this.areas = response.data.respData
+					this.selectedAreaId = this.areas[0].id
+				}
+			});
+
+			/*
 			this.$http.jsonp("getAddressInfo",{
 				params: {
-					addressId: 6
+					addressId: 7
 				}
 			}).then(response => {
 				console.log('getAddressInfo')
@@ -298,7 +321,7 @@ export default {
 					this.submitInfo = response.data.respData
 					//this.freight = 
 				}
-			});
+			});*/
 		}
 	},
 	methods:{
@@ -342,12 +365,7 @@ export default {
 		},
 		addOrder(){
 
-			var goods = JSON.stringify(this.allGoods.map(value => {
-				return {
-					goodsId: value.product.goodsId,
-					number: value.count
-				}
-			}))
+			var goods =  JSON.stringify([{ "goodsId": this.groupGood.goodsId, "number": 1 }]);
 
 			var params = {}
 			//自提
@@ -359,7 +377,7 @@ export default {
 					buyerName: this.account.buyerName,
 					buyerMobile: this.account.buyerMobile,
 					groupbuyId: this.groupbuyid,
-					ticketId: 0,
+					ticketId: this.submitInfo.tickets[0].id,
 					payWay: 1,
 					goods
 				}
@@ -367,9 +385,9 @@ export default {
 			}else{
 				params = {
 					buyWay: this.buyWay,
-					cityId: 5,
-					areaId: 6,
-					address: '测试地址',
+					cityId: 1,
+					areaId: this.selectedAreaId,
+					address: this.detailAddress,
 					buyerName: this.account.buyerName,
 					buyerMobile: this.account.buyerMobile,
 					groupbuyId: this.groupbuyid,
@@ -384,8 +402,6 @@ export default {
 			}).then(response => {
 				if(response.data.respCode == 0) {
 
-					var _this = this;
-
 					var config = response.data.respData;
 					wx.ready( () => {
 						wx.chooseWXPay({
@@ -397,13 +413,10 @@ export default {
 							paySign : config.paySign,
 							success(res){
 								alert(JSON.stringify(res))
-								_this.$router.go({
-									name: 'success',
-									params: {
-										orderId: config.orderId
-									}
+
+								this.$router.go({
+									name: 'gsuccess'
 								})
-								
 							},
 							cancel : function(res){
 								alert('cancel')
@@ -414,10 +427,10 @@ export default {
 			})
 		},
 		selectDelivery() {
-			this.buyWay = 2
+			this.buyWay = 1
 		},
 		selectNotDelivery() {
-			this.buyWay = 1
+			this.buyWay = 2
 		},
 		reduceCount(good){
 			var count = good.count;
@@ -428,7 +441,7 @@ export default {
 
 			this.addGoods({
 				product: good.product,
-				count: -1
+				count: count
 			})
 			//e.preventDefault();
 		},
@@ -438,7 +451,7 @@ export default {
 
 			this.addGoods({
 				product: good.product,
-				count: 1
+				count: ++count
 			})
 			//e.preventDefault()
 		},

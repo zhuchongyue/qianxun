@@ -4,6 +4,11 @@ export const groupbuyid = state => {
 }
 
 export const allGoods = state => {
+
 	return state.cart.goods
+}
+
+export const groupGood = state => {
+	return state.cart.groupGood
 }
 

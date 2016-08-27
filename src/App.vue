@@ -69,7 +69,7 @@
 			                 timestamp: conf.timestamp, 
 			                 nonceStr: conf.noncestr, 
 			                 signature: conf.signature,
-			                 jsApiList: ['getLocation','chooseWXPay','hideOptionMenu']
+			                 jsApiList: ['getLocation','chooseWXPay','hideOptionMenu','onMenuShareTimeline','onMenuShareAppMessage']
 			          });
 			      }
 			  });

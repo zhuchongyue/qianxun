@@ -1,87 +1,58 @@
 <template>
     <div class="mygroup">
-    	<div class="mygroup-info">
-    	    <img src="../Common/img/p.png" alt="">
-    	    <div class="mygroup-info-item">
-    	        <p>
-    	            <span class="title">
-    	                日本进口草莓_500g 
-    	            </span>
-    	            <span class="count">
-    	                X5
-    	            </span>
-    	        </p>
-    	        <p class="detail">
-    	            <span class="number">
-    	                10人组团
-    	            </span>
-    	            &nbsp;&nbsp;
-    	            <span class="price">
-    	                ￥59.9
-    	            </span>
-    	           
-    	        </p>
-    	        <p class="lack">
-    	           还差6人
-    	        </p>
-    	        <button class="invite">
-    	        	邀请好友参团
-    	        </button>
-    	    </div>
-    	</div>
 
-    	<div class="mygroup-info">
-    	    <img src="../Common/img/p.png" alt="">
-    	    <div class="mygroup-info-item">
-    	        <p>
-    	            <span class="title">
-    	                日本进口草莓_500g 
-    	            </span>
-    	            <span class="count">
-    	                X5
-    	            </span>
-    	        </p>
-    	        <p class="detail">
-    	            <span class="number">
-    	                10人组团
-    	            </span>
-    	            &nbsp;&nbsp;
-    	            <span class="price">
-    	                ￥59.9
-    	            </span>
-    	           
-    	        </p>
-    	        <p class="fail">
-    	        	组团失败已退款
-    	        </p>
-    	    </div>
-    	</div>
-    	<div class="mygroup-info">
-    	    <img src="../Common/img/p.png" alt="">
-    	    <div class="mygroup-info-item">
-    	        <p>
-    	            <span class="title">
-    	                日本进口草莓_500g 
-    	            </span>
-    	            <span class="count">
-    	                X5
-    	            </span>
-    	        </p>
-    	        <p class="detail">
-    	            <span class="number">
-    	                10人组团
-    	            </span>
-    	            &nbsp;&nbsp;
-    	            <span class="price">
-    	                ￥59.9
-    	            </span>
-    	           
-    	        </p>
-    	        <p class="success">
-    	        	组团成功
-    	        </p>
-    	    </div>
-    	</div>
+        <div v-for="group in myGroup" class="mygroup-info">
+            <img :src="group.img" alt="">
+            <div class="mygroup-info-item">
+                <p>
+                    <span class="title">
+                        {{ group.title }}
+                    </span>
+                    <span class="count">
+                        X5
+                    </span>
+                </p>
+                <p class="detail">
+                    <span class="number">
+                        {{ group.groupPerson }}人组团
+                    </span>
+                    &nbsp;&nbsp;
+                    <span class="price">
+                        ￥{{ group.money }}
+                    </span>
+                   
+                </p>
+                <p class="lack" v-if="group.status == 1">
+                   还差{{ group.remPerson }}人
+                </p>
+                <template v-if="group.status == 0">
+                    <button class="invite">
+                        待支付
+                    </button>
+                </template>
+
+                <template v-if="group.status == 1">
+                    <button @click="inviteFriend(group)" class="invite">
+                        邀请好友参团
+                    </button>
+                </template>
+
+                
+                <template v-if="group.status == 2">
+                   <p class="success">
+                        组团成功
+                    </p>
+                </template>
+                <template v-if="group.status == 3">
+                    <p class="fail">
+                        组团失败已退款
+                    </p>  
+                </template>
+               
+            </div>
+        </div>
+
+    	
     </div>
     <div @click="hideMask" v-if="showMask" class="mygroup-mask">
         <div class="mygroup-mask-con">
@@ -90,10 +61,10 @@
 	            剩余xx小时xx分xx秒
 	        </p>
 	        <p>
-	            还差x人组团成功
+	            还差{{ lackPerson }}人组团成功
 	        </p>
 	        <p>
-	            快去邀请更多小伙伴吧 
+	            快去邀请更多小伙伴吧
 	        </p>
 			        
             <img class="tangle" src="../Common/img/xiejiao.png" alt="">
@@ -105,26 +76,51 @@
     @import "MyGroup.less";
 </style>
 <script>
+
 export default {
     name: 'mygroup',
     data(){
         return {
-            showMask: true
+            showMask: false,
+            myGroup: [],
+            lackPerson: 0,
         }
     },
     methods: {
         hideMask(){
             this.showMask = false;
+        },
+        inviteFriend(group) {
+            this.showMask = true;
+            this.lackPerson = group.remPerson;
+
+            var link = `http://www.qx-llt.com/test/?wx=true&teamId=${group.teamId}#!/gdetail/${group.groupGoodsId}`;
+            var _this = this;
+
+            wx.ready(function(){
+                wx.onMenuShareTimeline({
+                    title: '千寻邻里团', // 分享标题
+                    link: link, // 分享链接
+                    imgUrl: group.img, // 分享图标
+                    success: function () { 
+                        _this.showMask = false;
+                        alert('分享成功！')
+                    },
+                    cancel: function () {
+                        _this.showMask = false;
+                        alert('取消失败！')
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+            })
         }
     },
     route: {
     	data(){
-            var userInfo = JSON.parse(localStorage.getItem("userInfo"));
-            
-            this.$http.jsonp("getMyGroups", {
-                params: {
-                   uid: userInfo.uid,
-                   openId: userInfo.openid
+            this.$http.jsonp("getMyGroups").then(response => {
+                console.log(response)
+                if( 0 == response.data.respCode ) {
+                    this.myGroup = response.data.respData;
                 }
             })
     	},
