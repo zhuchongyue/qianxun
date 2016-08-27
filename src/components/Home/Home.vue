@@ -1,42 +1,9 @@
 <template>
 
     <div class="home">
+       
+        <date-ele></date-ele>
 
-        <div class="home-time">
-
-            <div v-if="timeDefault" @click="spread" class="home-time-content home-time-content-default">
-                <div class="word">
-                    提货时间:
-                </div>
-                <div class="date date-default">
-                    
-                    <p class="date-item date-selected">
-                        {{selectedTime.time}}
-                        <img src="./img/selected.png" alt="">
-                    </p>
-
-                </div>
-                <div @click="spread" class="spread">
-                    <img src="./img/up.png">
-                </div>
-            </div>
-            <div v-else class="home-time-content">
-                <div class="word">
-                    提货时间:
-                </div>
-                <div class="date date-default">
-                    
-                    <p v-for="time in times" @click="selectTime(time)" class="date-item" :class="{ 'date-selected': time.groupbuyId == selectedTime.groupbuyId}">
-                       {{ time.time }}
-                        <img v-if="time.groupbuyId == selectedTime.groupbuyId" src="./img/selected.png" alt="">
-                    </p>
-
-                </div>
-                <div @click="spread" class="spread">
-                    <img src="./img/sanjiao.png">
-                </div>
-            </div>
-        </div>
         <div class="home-banner">
             <swiper :list="banners"></swiper>
         </div>
@@ -183,6 +150,8 @@ import swiper from '../Swiper/Swiper.vue'
 
 import util from '../../libs/util.js'
 
+import DateEle from '../Common/Date.vue'
+
 import groupItem from '../Common/GroupItem.vue'
 
 import generalItem from '../Common/GeneralItem.vue'
@@ -199,9 +168,7 @@ export default {
     	return {
     		length:[1,2,3],
             banners:[],
-            times:[],
-            selectedTime:{ time: "星期一"},
-            timeDefault: true,
+            
             productList:[]
     	}
     },
@@ -224,22 +191,7 @@ export default {
             this.$http.jsonp("getBannersAndTimes").then(response => {
 
                 if(response.data.respCode == 0) {
-                    this.times = response.data.respData.times
-
-                    this.changeGroupbuyid(this.times[0].groupbuyId)
-
-                    if(process.env.NODE_ENV !== 'production') {
-                       this.times = this.times.concat([
-                                {
-                                    groupbuyId:3,
-                                    time:"2016-08-24 星期三"
-                                },
-                                {
-                                    groupbuyId:4,
-                                    time:"2016-08-25 星期四"
-                                }
-                            ])
-                    }
+                   
                     this.banners = response.data.respData.banners.map(value => {
                         value.img = util.handleImg(value.imgUrl)
                         if(process.env.NODE_ENV !== 'production') {
@@ -265,20 +217,16 @@ export default {
 
         }
     },
+    events: {
+        'update-groupbuyid': function() {
+            this.getRecommendInfoById(this.groupbuyid);
+        }
+    },
     methods: {
         showCart(){
             this.$broadcast('show-cart');
         },
-        selectTime(time) {
-            this.selectedTime = time;
-            this.changeGroupbuyid(time.groupbuyId);
-            this.getRecommendInfoById(time.groupbuyId);
-            this.timeDefault = true;
-            this.clearGoods();
-        },
-        spread() {
-            this.timeDefault = false
-        },
+        
         getRecommendInfoById(id) {
             this.$http.jsonp("getRecommendInfo", { params: {
                 groupbuyId: id,
@@ -296,7 +244,8 @@ export default {
         swiper,
         groupItem,
         generalItem,
-        cartMask
+        cartMask,
+        dateEle:DateEle
     }
 }
 </script>
