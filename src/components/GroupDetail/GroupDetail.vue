@@ -16,67 +16,44 @@
 			<h3>
 				{{detail.title}}
 			</h3>
-			<ul>
-				<li>新鲜采摘绝无农药无农药</li>
-				<li>新鲜采摘绝无农药无农新鲜采摘绝无农药无农</li>
+			<ul v-for="desc in detail.goodsDesc">
+				<li>{{ desc }}</li>
 			</ul>
 			<div class="group-infos-tag">
-				<span>
+				<span v-if="detail.isExpress==1">
 					<img src="./img/selected.png" alt="">
 					快递
-				</span>
+				</span v-if="detail.isZiti==1">
 				<span>
 					<img src="./img/selected.png" alt="">自提
 				</span>
-				<span>
+				<span v-if="detail.isDay==1">
 					<img src="./img/selected.png" alt="">当日采摘
 				</span>
 			</div>
 			<p class="group-infos-specific">
-				支付开团并邀请{{detail.groupPerson}}个成团，人数不足自动退款，团长指定送货时间以及提货地点 
+				支付开团并邀请{{detail.groupPerson-1}}个成团，人数不足自动退款，团长指定送货时间以及提货地点
 			</p>
 		</div>
 
-		<div class="group-list">
+		<div class="group-list" v-if="detail.recommendGroups.length >0">
 			<p class="group-list-title">
-				以下小伙伴正在发起团购，可以直接参与 
+				以下小伙伴正在发起团购，可以直接参与
 			</p>
-			<div class="group-list-item">
-				<img src="./img/avatar.png" alt="">
+			<div class="group-list-item" v-for="rg in detail.recommendGroups">
+				<img v-bind:src="rg.portrait" alt="">
 				<div class="group-list-item-content">
 					<div class="group-list-item-content-addr">
 						<p class="name">
-							Jessica
+							{{rg.name}}
 						</p>
 						<p class="detail">
-							朝阳区东大桥路
+							{{rg.address}}
 						</p>
 					</div>
 					<div class="group-list-item-content-go">
 						<span>
-							还差1人成团
-						</span>
-						<span class="group">
-							去参团<i></i>
-						</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="group-list-item">
-				<img src="./img/avatar.png" alt="">
-				<div class="group-list-item-content">
-					<div class="group-list-item-content-addr">
-						<p class="name">
-							Jessica
-						</p>
-						<p class="detail">
-							朝阳区东大桥路
-						</p>
-					</div>
-					<div class="group-list-item-content-go">
-						<span>
-							还差1人成团
+							还差{{rg.remPerson}}人成团
 						</span>
 						<span class="group">
 							去参团<i></i>
@@ -87,7 +64,7 @@
 		</div>
 
 		<div class="group-intro">
-			
+
 			<div class="group-intro-tap">
 				<div class="group-intro-tap-item" @click="selectTap(1)" :class="{selected: tapIndex == 1}">
 					规格
@@ -102,114 +79,29 @@
 
 			<div class="group-intro-contents">
 				<div class="group-intro-contents-spec" :class="{none : tapIndex != 1}">
-					<p>
-						<span class="name">
-							商品名称
-						</span>
-						<span class="spec">
-							美国进口樱桃
-						</span>
-					</p>
-					<p>
-						<span class="name">商品规格</span>
-
-						<span class="spec">
-							500g
-						</span> 
-						 
-
-					</p>
-					<p>
-						<span class="name">价格</span>
-
-						<span class="spec">
-							29.8元
-						</span> 
-						 
-
-					</p>
-					<p>
-						<span class="name">产地</span>
-
-						<span class="spec">
-							美国
-						</span>
-					</p>
-
-					<p>
-						<span class="name">产品编号</span>
-
-						<span class="spec">
-							12345
-						</span> 
-
-					</p>
-
-					<p>
-						<span class="name">保质期</span>
-
-						<span class="spec">
-							冷藏保存,尽快食用
-						</span> 
-
-					</p>
+				<p v-for="rule in detail.rules">
+					<span class="name">
+						{{ rule.name }}
+					</span>
+					<span class="spec">
+						{{ rule.value }}
+					</span>
+				</p>
 				</div>
 				<div class="group-intro-contents-detail" :class="{none : tapIndex != 2}">
-
+					<div v-for="picDetail in detail.details">
 					<div class="img-wrap">
-						<img src="./img/banner.png" alt="">
+						<img v-bind:src="picDetail.img" alt="">
 					</div>
-					<p>
+					<p v-for="pp in picDetail.details">
 						<span class="name">
-							商品名称
+							{{ pp.name }}
 						</span>
 						<span class="spec">
-							美国进口樱桃
+							{{ pp.value }}
 						</span>
 					</p>
-					<p>
-						<span class="name">商品规格</span>
-
-						<span class="spec">
-							500g
-						</span> 
-						 
-
-					</p>
-					<p>
-						<span class="name">价格</span>
-
-						<span class="spec">
-							29.8元
-						</span> 
-						 
-
-					</p>
-					<p>
-						<span class="name">产地</span>
-
-						<span class="spec">
-							美国
-						</span>
-					</p>
-
-					<p>
-						<span class="name">产品编号</span>
-
-						<span class="spec">
-							12345
-						</span> 
-
-					</p>
-
-					<p>
-						<span class="name">保质期</span>
-
-						<span class="spec">
-							冷藏保存,尽快食用
-						</span> 
-
-					</p>
+					</div>
 				</div>
 				<div class="group-intro-contents-rule" :class="{none : tapIndex != 3}">
 					<img src="./img/progrss.png" alt="">
@@ -282,7 +174,7 @@
 					})
 				}else{
 					return []
-				 
+
 				}
 			}
 		},
@@ -322,7 +214,7 @@
 					}
 				})
 			}
-		},	
+		},
 		components:{
 			Swiper
 		}
