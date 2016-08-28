@@ -110,7 +110,7 @@
 						￥{{good.product.price}}
 					</p>
 					<span class="buy">
-						<b @click="reduceCount(good)">-</b>
+						<b @click="reduceCount(good)" :class="{ active: good.count>0}">-</b>
 						<var>{{good.count}}</var>
 						<b @click="addCount(good)" class="active">+</b>
 					</span>

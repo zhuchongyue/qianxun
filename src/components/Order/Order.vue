@@ -30,10 +30,10 @@
                 <span class="price">
                     ￥{{ order.totalMoney }}
                 </span>
-                <button  v-if="order.status===0">
+                <button @click="repay(order.orderId)" v-if="order.status===0">
                     支付
                 </button>
-                <button  v-if="order.status===4">
+                <button @click="showShare" v-if="order.status===4">
                     邀请好友
                 </button>
                 <span class="delivery" v-if="order.status===1">
@@ -41,6 +41,12 @@
                 </span>
                 </p>
             </div>
+        </div>
+    </div>
+    <div @click="hideMask" v-if="showMask" class="order-mask">
+        <div class="order-mask-con">
+            戳这里邀请好友
+            <img src="./img/sanjiao.png" alt="">
         </div>
     </div>
 </template>
@@ -53,6 +59,68 @@ export default {
     data() {
         return {
             orders: [],
+            showMask: false,
+        }
+    },
+    methods: {
+        hideMask(){
+            this.showMask = false;
+        },
+        repay(orderId) {
+            this.$http.jsonp("repay",{ params: {
+                orderId
+            }}).then( response => {
+                if(response.data.respCode == 0) {
+
+                    var config = response.data.respData;
+                    var _this = this;
+                    wx.ready( () => {
+                        wx.chooseWXPay({
+                            appId : config.appId,
+                            timestamp : config.timeStamp,
+                            nonceStr : config.nonceStr,
+                            package : config.packageSign,
+                            signType : config.signType,
+                            paySign : config.paySign,
+                            success(res){
+                                alert("支付成功")
+                               /* _this.router.go({
+                                    name: 'gsuccess',
+                                    params: {
+                                        orderId: config.orderId
+                                    }
+                                })*/
+                            },
+                            cancel : function(res){
+                                alert('您已取消支付')
+                            }
+                        })
+                    })
+                }
+            })
+        },
+        showShare() {
+            this.showMask = true;
+
+            var link = "http://www.qx-llt.com/test/?wx=true#!/"
+
+            var _this = this;
+            wx.ready(function(){
+                wx.onMenuShareTimeline({
+                    title: '千寻邻里团', // 分享标题
+                    link: link, // 分享链接
+                    imgUrl: "http://static.qx-llt.com/images/upload/20160519/27203415ac344c70be3a115b883730a5.jpg", // 分享图标
+                    success: function () { 
+                        _this.showMask = false;
+                        alert('分享成功！')
+                    },
+                    cancel: function () {
+                        _this.showMask = false;
+                        alert('取消分享！')
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+            })
         }
     },
     route: {
