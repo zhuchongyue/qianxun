@@ -177,7 +177,7 @@
 					支付订单
 				</div>
 			</div>
-			<div v-show="!showCartMask" class="delivery-oper-car" @click="showCart">
+			<div v-show="!showCartMask" class="delivery-oper-car">
 				<img src="../Common/img/car.png" alt="">
 			</div>
 		</div>
@@ -237,7 +237,7 @@ export default {
 			  price += parseFloat(value.product.price,10) * value.count;
 			})
 
-			price+= this.submitInfo.freight
+			price+= this.freight
 
 			return price
 		},
