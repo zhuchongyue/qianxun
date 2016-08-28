@@ -94,6 +94,12 @@ export default {
     events: {
       'hide-cart':function() {
         this.showCartMask = false;
+      },
+      'update-groupbuyid': function() {
+        this.$router.go({
+          name: 'list',
+          params: { cateid: 0 }
+        })
       }
     },
     computed: {

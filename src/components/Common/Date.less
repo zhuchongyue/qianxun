@@ -1,6 +1,69 @@
 @import "../common";
 
-.date{
+.home-time {
+	position: fixed;
+	top: 13 * @px;
+	width: 100%;
+	color: rgb( 23, 23, 23 );
+	z-index: 2;
+
+	&-content {
+		display: flex;
+		padding: 0 20 * @px;
+		box-sizing: border-box;
+		width: 580 * @px;
+		background-color: #fff;
+		border-radius: 20 * @px;
+		margin: 0 auto;
+		position: relative;
+
+		.spread {
+			position: absolute;
+			right: 20 * @px;
+			img {
+				 width: 20 * @px;
+			}
+		}
+
+		.word {
+			font-size: 26*@px;
+			padding-top: 10 * @px;
+			font-weight: bold;
+		}
+
+		.date {
+			margin-left: 10 * @px;
+			flex:1;
+			font-size: 26*@px;
+
+			&-item {
+				border-bottom: 1px solid rgba( 70, 70, 70, 0.702 );
+				padding: 10 * @px 0;
+				&:last-child {
+					border:0;
+				}
+
+				img {
+					height: 14 * @px;
+					float: right;
+					margin-right: 60 * @px;
+					margin-top: 10 * @px;
+				}
+			}
+
+			&-selected {
+				font-weight: bold;
+			}
+
+		}
+	}
+
+	&-content-default {
+		background-color: rgba( 255, 255, 255, 0.5 );
+	}
+}
+
+/* .date{
 	position: fixed;
 	top: 13 * @px;
 	width: 100%;
@@ -66,4 +129,4 @@
 
 		}
 	}
-}
+} */
