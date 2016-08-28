@@ -12,3 +12,7 @@ export const groupGood = state => {
 	return state.cart.groupGood
 }
 
+export const config = state => {
+	return state.cart.config
+}
+

@@ -54,7 +54,7 @@
 	      </div> -->
 	        <div class="cmask-oper-empty-word">
 	        共<span class="sum-price">￥{{ sumPrice }}</span>
-	        (满80包邮)
+	        (满{{ config.limitFreight }}包邮)
 	        </div>
 		    <div class="cmask-oper-empty-summary">
 			        <a v-link="{name: 'delivery'}">
@@ -72,7 +72,7 @@
 
 	import { changeGroupbuyid, addGoods, clearGoods } from '../../vuex/actions.js'
 
-	import { groupbuyid, allGoods } from '../../vuex/getters.js'
+	import { groupbuyid, allGoods, config } from '../../vuex/getters.js'
 
 	export default {
 		name: 'cart-mask',
@@ -88,7 +88,8 @@
 				addGoods
 			},
 			getters: {
-				allGoods
+				allGoods,
+				config
 			}
 		},
 		computed: {
@@ -123,8 +124,6 @@
 				}else{
 					return;
 				}
-
-				
 			},
 			addCount(good) {
 				

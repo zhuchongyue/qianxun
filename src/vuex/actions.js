@@ -21,3 +21,7 @@ export const setGroupGood = ({ dispatch }, groupGood) => {
 export const addDetailGood = ({ dispatch }, good) => {
 	dispatch(types.ADD_DETAIL_GOODS, good)
 }
+
+export const setConfig = ({ dispatch }, config) => {
+	dispatch(types.SET_CONFIG, config)
+}

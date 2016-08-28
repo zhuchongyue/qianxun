@@ -9,7 +9,7 @@
       		</div> -->
 	        <div class="cart-oper-empty-word">
 	         共<span class="sum-price">￥{{ sumPrice }}</span>
-	         (满80包邮)
+	         (满{{ config.limitFreight }}包邮)
 	        </div>
 			<div class="cart-oper-empty-summary">
 		        <a v-link="{name: 'delivery'}">
@@ -26,7 +26,7 @@
 
 	import { changeGroupbuyid, addGoods } from '../../vuex/actions.js'
 
-	import { groupbuyid, allGoods } from '../../vuex/getters.js'
+	import { groupbuyid, allGoods, config } from '../../vuex/getters.js'
 
 	export default {
 		name: 'cart-bar',
@@ -53,7 +53,8 @@
 		},
 		vuex: {
 			getters: {
-				allGoods
+				allGoods,
+				config
 			}
 		}
 	}

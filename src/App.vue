@@ -10,13 +10,15 @@
 
 	import store from './vuex/store'
 
-	//import Cookie from './libs/cookie.js'
+	import { setConfig } from './vuex/actions.js'
+
 	import Cookie from './libs/cookie.js'
 
 	export default {
 		store,
 
 		ready(){
+
 
 			var _this = this;
 			_this.wxConfig();
@@ -50,6 +52,12 @@
 				
 				}
 			}
+
+			this.$http.jsonp("getConfig").then(response => {
+				if(0 == response.data.respCode ) {
+					this.setConfig(response.data.respData)
+				}
+			})
 		},
 
 		methods: {
@@ -73,6 +81,11 @@
 			          });
 			      }
 			  });
+			}
+		},
+		vuex: {
+			actions: {
+				setConfig
 			}
 		}
 	}

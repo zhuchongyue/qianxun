@@ -112,6 +112,9 @@
                 </a>
         	</div>
         </div>
+        <div @click="goTop(0.2,16)" class="home-back">
+            <img src="./img/top.png">
+        </div>
     </div>
     <cart-mask></cart-mask>
 </template>
@@ -209,7 +212,39 @@ export default {
                     this.productList = response.data.respData
                 }
             })
-        }
+        },
+
+        goTop(acceleration, time) { 
+             
+             function invokeFunction() {
+                var y1 = 0; 
+                var y2 = 0; 
+                var x3 = 0; 
+                var y3 = 0; 
+                 
+                if (document.documentElement) { 
+                    y1 = document.documentElement.scrollTop || 0; 
+                } 
+                if (document.body) { 
+                    y2 = document.body.scrollTop || 0; 
+                } 
+                var y3 = window.scrollY || 0; 
+                var y = Math.max(y1, y2, y3); 
+                 
+                var speed = 1 + acceleration; 
+
+                window.scrollTo(0, Math.floor(y / speed));
+
+                if(y > 0 ) { 
+                    window.setTimeout(invokeFunction, time); 
+                }
+             }
+             
+            // 如果距离不为零, 继续调用迭代本函数 
+            if(document.body.scrollTop > 0 ) { 
+                window.setTimeout(invokeFunction, time); 
+            } 
+        } 
 
     },
     components: {

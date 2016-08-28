@@ -11,6 +11,7 @@ import {
 
    ADD_DETAIL_GOODS,
 
+   SET_CONFIG,
 
 } from '../mutations-types'
 
@@ -20,6 +21,7 @@ const state = {
 	groupbuyid: parseInt(sessionStorage.getItem("groupbuyid")) || 0,
 	goods: JSON.parse(sessionStorage.getItem("goods")) || [],
 	groupGood: JSON.parse(sessionStorage.getItem("groupGood")) || {},
+	config: JSON.parse(sessionStorage.getItem("config")) || {},
 
 }
 
@@ -73,6 +75,10 @@ const mutations = {
 	CLEAR_GOODS (state) {
 		state.goods = [];
 		sessionStorage.setItem("goods", JSON.stringify(state.goods))
+	},
+	SET_CONFIG (state, config) {
+		state.config = config;
+		sessionStorage.setItem("config", JSON.stringify(state.config))
 	}
 
 }

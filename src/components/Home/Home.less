@@ -284,4 +284,24 @@
 		}
 
 	}
+
+	&-back{
+		position: fixed;
+		bottom: 110*@px;
+		right: 30 * @px;
+		border-radius: 10*@px;
+		background-color: rgb( 0, 0, 0 );
+		opacity: 0.1;
+
+		width: 56*@px;
+		height: 56*@px;
+		img {
+			position: absolute;
+			width: 20 * @px;
+			height: 12*@px;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+	}
 }
