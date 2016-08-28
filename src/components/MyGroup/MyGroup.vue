@@ -9,7 +9,7 @@
                         {{ group.title }}
                     </span>
                     <span class="count">
-                        X5
+                        X1
                     </span>
                 </p>
                 <p class="detail">
@@ -20,24 +20,18 @@
                     <span class="price">
                         ￥{{ group.money }}
                     </span>
-                   
+
                 </p>
                 <p class="lack" v-if="group.status == 1">
                    还差{{ group.remPerson }}人
                 </p>
-                <template v-if="group.status == 0">
-                    <button class="invite">
-                        待支付
-                    </button>
-                </template>
-
                 <template v-if="group.status == 1">
                     <button @click="inviteFriend(group)" class="invite">
                         邀请好友参团
                     </button>
                 </template>
 
-                
+
                 <template v-if="group.status == 2">
                    <p class="success">
                         组团成功
@@ -46,13 +40,13 @@
                 <template v-if="group.status == 3">
                     <p class="fail">
                         组团失败已退款
-                    </p>  
+                    </p>
                 </template>
-               
+
             </div>
         </div>
 
-    	
+
     </div>
     <div @click="hideMask" v-if="showMask" class="mygroup-mask">
         <div class="mygroup-mask-con">
@@ -66,7 +60,7 @@
 	        <p>
 	            快去邀请更多小伙伴吧
 	        </p>
-			        
+
             <img class="tangle" src="../Common/img/xiejiao.png" alt="">
             <img class="remind" src="../Common/img/tan.png" alt="">
         </div>
@@ -102,7 +96,7 @@ export default {
                     title: '千寻邻里团', // 分享标题
                     link: link, // 分享链接
                     imgUrl: group.img, // 分享图标
-                    success: function () { 
+                    success: function () {
                         _this.showMask = false;
                         alert('分享成功！')
                     },

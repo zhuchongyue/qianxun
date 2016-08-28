@@ -16,7 +16,7 @@
 				</span>
 			</p>
 			<p>
-				<span class="sum">已收{{ product.saleNum }}份</span>
+				<span class="sum">已售{{ product.saleNum }}份</span>
 				<span class="buy">
 					<b class="reduce" @click="reduceCount($event)">-</b>
 					<var>{{count}}</var>

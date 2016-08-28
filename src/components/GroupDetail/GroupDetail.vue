@@ -36,7 +36,7 @@
 			</p>
 		</div>
 
-		<div class="group-list" v-if="detail.recommendGroups.length >0">
+		<div class="group-list" v-if="detail.recommendGroups && detail.recommendGroups.length >0">
 			<p class="group-list-title">
 				以下小伙伴正在发起团购，可以直接参与
 			</p>
