@@ -1,8 +1,8 @@
 <template>
 	<div class="delivery">
 		<div class="delivery-tip">
-			<p class="delivery-tip-harry">
-				xxx库存紧张 请尽快支付
+			<p v-if="submitInfo.warn" class="delivery-tip-harry">
+				{{ submitInfo.warn }}
 			</p>
 			
 		</div>
@@ -10,7 +10,7 @@
 		<div class="delivery-addr">
 			<div class="delivery-addr-tap">
 				<div class="delivery-addr-tap-select" @click="selectDelivery" v-bind:class="{selected: buyWay == 2 }">
-					配送(满80包邮)
+					配送(满{{submitInfo.limitFreight }}包邮)
 				</div>
 				<div class="delivery-addr-tap-new"    @click="selectNotDelivery" v-bind:class="{selected: buyWay == 1 }">
 					自提(免费)
