@@ -65,22 +65,21 @@
 							{{ rule.value }}
 						</span>
 					</p>
-
-
 				</div>
 				<div class="detail-intro-contents-detail" v-else>
-
-					<div class="img-wrap">
-						<img v-for="img in detail.imgs" :src="img" alt="">
+						<div v-for="picDetail in detail.details">
+					<div class="img-wrap" v-if="picDetail.img">
+						<img v-bind:src="picDetail.img" alt="">
 					</div>
-					<p v-for="rule in detail.rules">
+					<p v-for="pp in picDetail.details">
 						<span class="name">
-							{{ rule.name }}
+							{{ pp.name }}
 						</span>
 						<span class="spec">
-							{{ rule.value }}
+							{{ pp.value }}
 						</span>
 					</p>
+					</div>
 				</div>
 
 			</div>
