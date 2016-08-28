@@ -44,6 +44,25 @@
 				</div>
 			</div>
 		</div>
+		<div class="cmask-oper">
+			<div class="cmask-oper-empty">
+				<!-- <div class="cmask-oper-empty-car">
+					<img src="./img/car.png" alt="">
+				</div> -->
+				<!-- <div class="cart-oper-empty-word">
+	        购物车是空的
+	      </div> -->
+	        <div class="cmask-oper-empty-word">
+	        共<span class="sum-price">￥{{ sumPrice }}</span>
+	        (满80包邮)
+	        </div>
+		    <div class="cmask-oper-empty-summary">
+			        <a v-link="{name: 'delivery'}">
+							结算({{allGoods.length}})
+			        </a>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 <style lang="less">
@@ -73,7 +92,7 @@
 			}
 		},
 		computed: {
-			/*sumPrice() {
+			sumPrice() {
 				var price = 0;
 
 				this.allGoods.forEach(value => {
@@ -81,7 +100,7 @@
 				})
 
 				return price
-			}*/
+			}
 		},
 		events: {
 			'hide-cart': function() {
