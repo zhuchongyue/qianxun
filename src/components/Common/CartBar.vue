@@ -1,20 +1,20 @@
 <template>
 	<div class="cart-oper">
 		<div class="cart-oper-empty">
-			<div class="cart-oper-empty-car">
+			<div class="cart-oper-empty-car" @click="showCartList">
 				<img src="./img/car.png" alt="">
 			</div>
 			<!-- <div class="cart-oper-empty-word">
-        购物车是空的
-      </div> -->
-      <div class="cart-oper-empty-word">
-        共<span class="sum-price">￥{{ sumPrice }}</span>
-        (满80包邮)
-      </div>
+        		购物车是空的
+      		</div> -->
+	        <div class="cart-oper-empty-word">
+	         共<span class="sum-price">￥{{ sumPrice }}</span>
+	         (满80包邮)
+	        </div>
 			<div class="cart-oper-empty-summary">
-        <a v-link="{name: 'delivery'}">
-				    结算({{allGoods.length}})
-        </a>
+		        <a v-link="{name: 'delivery'}">
+					结算({{allGoods.length}})
+		        </a>
 			</div>
 		</div>
 	</div>
@@ -33,6 +33,11 @@
 		data() {
 			return {
 				sumPrice: 0
+			}
+		},
+		methods: {
+			showCartList() {
+				this.$dispatch('show-cart-list')
 			}
 		},
 		computed: {

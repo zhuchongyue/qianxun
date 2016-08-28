@@ -130,7 +130,7 @@ import groupItem from '../Common/GroupItem.vue'
 
 import generalItem from '../Common/GeneralItem.vue'
 
-import cartMask from '../Common/cartMask.vue'
+import cartMask from '../Common/CartMask.vue'
 
 import { changeGroupbuyid, clearGoods } from '../../vuex/actions.js'
 

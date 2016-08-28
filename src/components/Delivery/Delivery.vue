@@ -163,7 +163,7 @@ import { groupbuyid, allGoods } from '../../vuex/getters.js'
 
 import { changeGroupbuyid, addGoods } from '../../vuex/actions.js'
 
-import cartMask from '../Common/cartMask.vue'
+import cartMask from '../Common/CartMask.vue'
 
 export default {
 	name:'delivery',

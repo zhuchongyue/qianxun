@@ -65,7 +65,7 @@ import GeneralItem from '../Common/GeneralItem.vue'
 
 import GroupItem from '../Common/GroupItem.vue'
 
-import cartMask from '../Common/cartMask.vue'
+import cartMask from '../Common/CartMask.vue'
 
 import { groupbuyid, allGoods } from '../../vuex/getters.js'
 
