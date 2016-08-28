@@ -44,7 +44,7 @@
 
 		data() {
 			return {
-				count: 0
+				
 			}
 		},
 
@@ -75,13 +75,19 @@
 				e.preventDefault()
 			},
 		},
-		ready(){
-
-			for(let i=0; i<this.allGoods.length; i++){
-				if(_.isEqual(this.allGoods[i].product.goodsId, this.product.goodsId)) {
-					this.count = this.allGoods[i].count
+		computed: {
+			count() {
+				var temp = 0;
+				for(let i=0; i<this.allGoods.length; i++){
+					if(_.isEqual(this.allGoods[i].product.goodsId, this.product.goodsId)) {
+						temp = this.allGoods[i].count
+					}
 				}
+
+				return temp;
 			}
+		},
+		ready(){
 		},
 		vuex: {
 			actions: {
