@@ -74,7 +74,8 @@ export default {
     name: 'home',
     vuex: {
       getters: {
-        allGoods
+        allGoods,
+        groupbuyid
       }
     },
     methods: {
@@ -125,12 +126,15 @@ export default {
           params = {
             pageNo:1,
             pageSize: 30,
-            categoryId: this.cateId
+            categoryId: this.cateId,
+            groupbuyId: this.groupbuyid
           }
         }else{
           params = {
             pageNo:1,
             pageSize: 30,
+            groupbuyId: this.groupbuyid
+
           }
         }
 
@@ -138,7 +142,9 @@ export default {
             params = {
               pageNo:1,
               pageSize: 30,
-              isGroup: 1
+              isGroup: 1,
+              groupbuyId: this.groupbuyid
+
             }
         }
 

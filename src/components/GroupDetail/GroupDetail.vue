@@ -17,8 +17,8 @@
 				{{detail.title}}
 			</h3>
 			<ul>
-				<li>新鲜采摘绝无农药无农药</li>
-				<li>新鲜采摘绝无农药无农新鲜采摘绝无农药无农</li>
+
+				<li v-for="desc in detail.goodsDesc">{{ desc }}</li>
 			</ul>
 			<div class="group-infos-tag">
 				<span>
@@ -229,7 +229,7 @@
 			<div class="group-oper-item group-oper-alone" @click="singleAddOrder">
 				<a>
 					<p class="price">
-						￥248
+						￥{{ detail.price }}
 					</p>
 					单独购买
 				</a>
@@ -237,7 +237,7 @@
 			<div class="group-oper-item group-oper-all" @click="groupAddOrder">
 				<a>
 					<p class="price">
-						￥177
+						￥{{ detail.groupPrice }}
 					</p>
 					3人团
 				</a>
