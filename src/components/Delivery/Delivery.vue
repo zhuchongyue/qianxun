@@ -98,7 +98,17 @@
 		</div>
 
 		<div class="delivery-voucher">
-			暂无可用代价券
+			<template v-if="submitInfo.tickets && submitInfo.tickets.length>0">
+				代金券
+				<select v-model="ticket" name="" id="">
+					<option v-for="tc in submitInfo.tickets" v-bind:value="tc">
+						{{ tc.title }}
+					</option>
+				</select>
+			</template>
+			<template v-else>
+				暂无可用代价券
+			</template>
 		</div>
 		<div class="delivery-list">
 
@@ -175,6 +185,7 @@ export default {
 			selectedArea:'',
 			addresses:[{}],
 			selectedAddressIndex:0,
+			ticket: {},
 			account:{},
 			buyWay:1,
 			showCartMask: false,
@@ -205,7 +216,9 @@ export default {
 			  price += parseFloat(value.product.price,10) * value.count;
 			})
 
-			price+= this.freight
+			price+= this.freight;
+
+			//if(this.submitInfo.tickets && this.submitInfo.tickets[])
 
 			return price
 		},
@@ -278,8 +291,8 @@ export default {
 				}
 			}).then(response => {
 				if(response.data.respCode == 0) {
-					this.submitInfo = response.data.respData
-					//this.freight = 
+					this.submitInfo = response.data.respData;
+					this.ticket = this.submitInfo.tickets[0]
 				}
 			});
 		}
@@ -309,7 +322,7 @@ export default {
 					buyerName: this.account.buyerName,
 					buyerMobile: this.account.buyerMobile,
 					groupbuyId: this.groupbuyid,
-					ticketId: 0,
+					ticketId: this.ticket.ticketId,
 					payWay: 1,
 					goods
 				}
@@ -323,7 +336,7 @@ export default {
 					buyerName: this.account.buyerName,
 					buyerMobile: this.account.buyerMobile,
 					groupbuyId: this.groupbuyid,
-					ticketId: 0,
+					ticketId: this.ticket.ticketId,
 					payWay: 1,
 					goods
 				}
