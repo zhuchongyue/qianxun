@@ -18,7 +18,7 @@
 			<p>
 				<span class="sum">已售{{ product.saleNum }}份</span>
 				<span class="buy">
-					<b class="reduce" @click="reduceCount($event)">-</b>
+					<b class="reduce" :class="{ active: count > 0}" @click="reduceCount($event)">-</b>
 					<var>{{count}}</var>
 					<b class="add active" @click="addCount($event)">+</b>
 				</span>
@@ -53,8 +53,11 @@
 		},
 		methods: {
 			reduceCount(e){
-				if(this.count>0){
+				if(this.count>=1){
 					this.count--;
+				}else{
+					e.preventDefault();
+					return;
 				}
 
 				this.addGoods({

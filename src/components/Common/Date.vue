@@ -51,7 +51,7 @@
         return {
           length:[1,2,3],
               times:[],
-              selectedTime:{ time: ""},
+              /*selectedTime:{ time: ""},*/
               timeDefault: true,
               productList:[]
         }
@@ -64,17 +64,28 @@
                 
                 if(this.groupbuyid == 0) {
                     this.changeGroupbuyid(this.times[0].groupbuyId)
-                    this.selectedTime = this.times[0];
-                }else {
+                    //this.selectedTime = this.times[0];
+                }/*else {
                     this.times.forEach(value => {
                         if(value.groupbuyId == this.groupbuyid){
                           this.selectedTime = value
                         }
                     })
-                }
+                }*/
                 
               }
           })
+      },
+      computed: {
+        selectedTime(){
+            let temp = { time: ""};
+            this.times.forEach(value => {
+                if(value.groupbuyId == this.groupbuyid){
+                  temp = value
+                }
+            })
+            return temp;
+        }
       },
       vuex: {
           actions: {

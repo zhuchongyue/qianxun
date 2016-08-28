@@ -115,14 +115,16 @@
 				this.clearGoods();
 			},
 			reduceCount(good){
-				if(this.count>0){
-					this.count--;
+				if(good.count>=1){
+					this.addGoods({
+						product: good.product,
+						count: -1
+					})
+				}else{
+					return;
 				}
 
-				this.addGoods({
-					product: good.product,
-					count: -1
-				})
+				
 			},
 			addCount(good) {
 				

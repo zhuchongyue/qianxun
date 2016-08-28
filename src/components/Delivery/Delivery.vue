@@ -372,8 +372,10 @@ export default {
 		reduceCount(good){
 			var count = good.count;
 
-			if(count>0){
+			if(count>=1){
 				count--;
+			}else{
+				return;
 			}
 
 			this.addGoods({
