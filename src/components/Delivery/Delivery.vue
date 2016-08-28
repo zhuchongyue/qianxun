@@ -4,21 +4,7 @@
 			<p class="delivery-tip-harry">
 				xxx库存紧张 请尽快支付
 			</p>
-			<!-- <div class="delivery-tip-place">
-				<p>
-					提货时间
-					&nbsp;&nbsp;
-					星期一(8.19)
-				</p>
-				<ul>
-					<li>
-						免费自提，团长指定提货地点
-					</li>
-					<li>
-						全团商品将寄到团长指定地点
-					</li>
-				</ul>
-			</div> -->
+			
 		</div>
 
 		<div class="delivery-addr">
@@ -130,21 +116,6 @@
 					</span>
 				</div>
 			</div>
-
-			<!-- <div class="delivery-list-item">
-				<img src="./img/luobo.png" alt="">
-				<div class="delivery-list-item-info">
-					<h3>新西南进口胡萝卜</h3>
-					<p class="price">
-						￥29.8
-					</p>
-					<span class="buy">
-						<b>-</b>
-						<var>0</var>
-						<b class="active">+</b>
-					</span>
-				</div>
-			</div> -->
 		</div>
 
 		<div class="delivery-all">
@@ -152,13 +123,10 @@
 				优惠<span>5元</span>
 			</p>
 			<p>
-				运费<span>
-					{{ freight }}
-					元
-					</span>
+				运费<span>{{ freight }}元</span>
 			</p>
 			<p>
-				合计<span>{{sumPrice}}元</span>
+				合计<span>{{ sumPrice }}元</span>
 			</p>
 		</div>
 
@@ -321,44 +289,7 @@ export default {
 		  this.showCartMask = true;
 		  this.$broadcast('show-cart');
 		},
-		createOrder() {
-
-			var goods =  JSON.stringify([{"goodsId": 38, "number": 3},{"goodsId": 14,"number": 1}]);
-
-			this.$http.jsonp("addOrder", {
-				params: {
-					buyWay: 1,
-					buyerName: "朱崇跃",
-					buyerMobile: "18612782819",
-					groupbuyId: 1,
-					payWay: 1,
-					goods,
-					ticketId: 0,
-					address:"北京北京"
-				}
-			}).then( response => {
-				if(response.data.respCode == 0) {
-
-					var config = response.data.respData;
-					wx.ready( () => {
-						wx.chooseWXPay({
-							appId : config.appId,
-							timestamp : config.timeStamp,
-							nonceStr : config.nonceStr,
-							package : config.packageSign,
-							signType : config.signType,
-							paySign : config.paySign,
-							success(res){
-								alert(JSON.stringify(res))
-							},
-							cancel : function(res){
-								alert('cancel')
-							}
-						})
-					})
-				}
-			})
-		},
+		
 		addOrder(){
 
 			var goods = JSON.stringify(this.allGoods.map(value => {
