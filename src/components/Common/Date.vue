@@ -50,7 +50,6 @@
       data() {
         return {
           length:[1,2,3],
-              banners:[],
               times:[],
               selectedTime:{ time: ""},
               timeDefault: true,

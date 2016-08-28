@@ -16,8 +16,8 @@
 			<h3>
 				{{detail.title}}
 			</h3>
-			<ul v-for="desc in detail.goodsDesc">
-				<li>{{ desc }}</li>
+			<ul v-if="">
+				<li v-for="desc in detail.goodsDesc">{{ desc }}</li>
 			</ul>
 			<div class="group-infos-tag">
 				<span v-if="detail.isExpress==1">
@@ -55,9 +55,11 @@
 						<span>
 							还差{{rg.remPerson}}人成团
 						</span>
-						<span class="group">
-							去参团<i></i>
-						</span>
+						<a v-link="{ name: 'group-detail', params : { goodId: rg.groupGoodsId }, query: { teamId: rg.teamId }}">
+							<span class="group">
+								去参团<i></i>
+							</span>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -121,7 +123,7 @@
 			<div class="group-oper-item group-oper-alone" @click="singleAddOrder">
 				<a>
 					<p class="price">
-						￥248
+						￥{{ detail.price }}
 					</p>
 					单独购买
 				</a>
@@ -129,7 +131,7 @@
 			<div class="group-oper-item group-oper-all" @click="groupAddOrder">
 				<a>
 					<p class="price">
-						￥177
+						￥{{ detail.groupPrice }}
 					</p>
 					3人团
 				</a>

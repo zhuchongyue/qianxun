@@ -88,32 +88,6 @@
                         <general-item :product="product"></general-item>
                     </template>
                 </template>
-
-        		<!-- <div v-for="var p in length" class="home-list-content-item">
-                    <img src="./img/luobo.png" alt="">
-                    <div class="home-list-content-item-info">
-                        <h3>新西兰进口胡萝新西兰进口胡萝卜</h3>
-                        <p class="desc">
-                            新鲜采摘绝无农药新鲜采摘绝无农药
-                        </p>
-                        <p>
-                            <span class="now">
-                                ￥28.9
-                            </span>
-                                            <span class="old">
-                                                ￥45.9
-                                            </span>
-                        </p>
-                        <p>
-                            <span class="sum">已收343份</span>
-                            <span class="buy">
-                                <b class="reduce">-</b>
-                                <var>0</var>
-                                <b class="add active">+</b>
-                            </span>
-                        </p>
-                    </div>
-                </div> -->
         	</div>
         </div>
         <div class="home-oper">
@@ -156,7 +130,7 @@ import groupItem from '../Common/GroupItem.vue'
 
 import generalItem from '../Common/GeneralItem.vue'
 
-import cartMask from '../Common/cartMask.vue'
+import cartMask from '../Common/CartMask.vue'
 
 import { changeGroupbuyid, clearGoods } from '../../vuex/actions.js'
 
@@ -166,9 +140,7 @@ export default {
     name: 'home',
     data() {
     	return {
-    		length:[1,2,3],
             banners:[],
-            
             productList:[]
     	}
     },

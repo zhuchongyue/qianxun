@@ -86,6 +86,7 @@
 		</div>
 
 		<cart-bar></cart-bar>
+		<cart-mask></cart-mask>
 		<!-- <div class="detail-oper">
 			<div class="detail-oper-item detail-oper-home">
 				<a href="">
@@ -122,6 +123,8 @@
 	import Swiper from '../Swiper/Swiper.vue'
 
 	import CartBar from '../Common/CartBar.vue'
+
+	import cartMask from '../Common/CartMask.vue'
 
 	import { addGoods, addDetailGood } from '../../vuex/actions.js'
 
@@ -170,6 +173,11 @@
 				})
 			}
 		},
+		events: {
+			'show-cart-list': function() {
+				this.$broadcast('show-cart');
+			}
+		},
 		methods: {
 			selectTap(index) {
 				this.tapIndex = index
@@ -185,7 +193,8 @@
 		},
 		components:{
 			Swiper,
-			CartBar
+			CartBar,
+			cartMask
 		}
 	}
 </script>
