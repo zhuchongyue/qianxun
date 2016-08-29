@@ -133,7 +133,7 @@
 					<p class="price">
 						￥{{ detail.groupPrice }}
 					</p>
-					3人团
+					{{detail.groupPerson}}人团
 				</a>
 			</div>
 		</div>
