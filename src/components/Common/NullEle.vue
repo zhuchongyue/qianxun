@@ -7,7 +7,7 @@
 			</p>
 		</div>
 		<div class="null-link">
-			<a v-link="" class="null-link-a">
+			<a v-link="{name: 'home'}" class="null-link-a">
 				去逛逛
 			</a>
 		</div>

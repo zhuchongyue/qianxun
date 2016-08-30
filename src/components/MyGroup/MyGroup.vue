@@ -1,52 +1,54 @@
 <template>
     <div class="mygroup">
-
-        <div v-if="myGroup && myGroup.length" v-for="group in myGroup" class="mygroup-info">
-            <img :src="group.img" alt="">
-            <div class="mygroup-info-item">
-                <p>
-                    <span class="title">
-                        {{ group.title }}
-                    </span>
-                    <span class="count">
-                        X{{ group.num }}
-                    </span>
-                </p>
-                <p class="detail">
-                    <span class="number">
-                        {{ group.groupPerson }}人组团
-                    </span>
-                    &nbsp;&nbsp;
-                    <span class="price">
-                        ￥{{ group.money }}
-                    </span>
-
-                </p>
-                <p class="lack" v-if="group.status == 1">
-                   还差{{ group.remPerson }}人
-                </p>
-                <template v-if="group.status == 1">
-                    <button @click="inviteFriend(group)" class="invite">
-                        邀请好友参团
-                    </button>
-                </template>
-
-
-                <template v-if="group.status == 2">
-                   <p class="success">
-                        组团成功
+        <div v-if="myGroup && myGroup.length">
+            <div v-for="group in myGroup" class="mygroup-info">
+                <img :src="group.img" alt="">
+                <div class="mygroup-info-item">
+                    <p>
+                        <span class="title">
+                            {{ group.title }}
+                        </span>
+                        <span class="count">
+                            X{{ group.num }}
+                        </span>
                     </p>
-                </template>
-                <template v-if="group.status == 3">
-                    <p class="fail">
-                        组团失败已退款
-                    </p>
-                </template>
+                    <p class="detail">
+                        <span class="number">
+                            {{ group.groupPerson }}人组团
+                        </span>
+                        &nbsp;&nbsp;
+                        <span class="price">
+                            ￥{{ group.money }}
+                        </span>
 
+                    </p>
+                    <p class="lack" v-if="group.status == 1">
+                       还差{{ group.remPerson }}人
+                    </p>
+                    <template v-if="group.status == 1">
+                        <button @click="inviteFriend(group)" class="invite">
+                            邀请好友参团
+                        </button>
+                    </template>
+
+
+                    <template v-if="group.status == 2">
+                       <p class="success">
+                            组团成功
+                        </p>
+                    </template>
+                    <template v-if="group.status == 3">
+                        <p class="fail">
+                            组团失败已退款
+                        </p>
+                    </template>
+
+                </div>
             </div>
         </div>
-        <null-ele v-else :word="nullWord"></null-ele>
-
+        <div v-else>
+            <null-ele></null-ele>
+        </div>
 
     </div>
     <div @click="hideMask" v-if="showMask" class="mygroup-mask">
