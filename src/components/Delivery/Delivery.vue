@@ -92,7 +92,10 @@
 					</div>
 				</div>
 				<div class="delivery-addr-new-all">
-					地址&nbsp;&nbsp;{{ addresses[selectedAddressIndex].name }}
+					<span>
+						地址
+					</span>
+					&nbsp;&nbsp;{{ addresses[selectedAddressIndex].name }}
 				</div>
 			</div>
 		</div>

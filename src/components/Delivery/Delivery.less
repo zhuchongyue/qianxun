@@ -211,7 +211,7 @@
 					  color: rgb( 102, 102, 102 );
 					  padding: 15 * @px 0;
 					  width: 200 * @px;
-					  padding-right: 10 * @px;
+					  margin-right: 10 * @px;
 					  text-align: right;
 				}
 
@@ -225,7 +225,6 @@
 					  color: rgb( 23, 23, 23 );
 					  padding: 15 * @px 0;
 					  font-weight: bold;
-					  border-bottom: 1px solid @split;
 				}
 
 				&-detail {
@@ -238,9 +237,15 @@
 
 			&-all {
 				  font-size: 22*@px;
-				  text-align: center;
+				  
 				  color: rgb( 126, 126, 126 );
-				padding: 15 * @px 0;
+				  padding: 15 * @px 0;
+				  span {
+					display: inline-block;
+					width: 200*@px;
+					text-align: right;
+				  }
+				  
 			}
 		}
 
