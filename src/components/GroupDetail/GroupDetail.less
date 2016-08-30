@@ -133,6 +133,12 @@
 						  color: rgb( 126, 126, 126 );
 						  position: absolute;
 						  bottom: 0;
+						  width: 180*@px;
+						  display: -webkit-box;
+						  overflow: hidden;
+						  text-overflow: ellipsis;
+						  -webkit-line-clamp: 1;
+						  -webkit-box-orient: vertical;
 					}
 				}
 
@@ -166,14 +172,11 @@
 
 	&-intro {
 		margin-top: 10 * @px;
-
-		margin-bottom: 90*@px;
+		margin-bottom: 100*@px;
 
 		&-tap{
 			background-color: #fff;
 			display: flex;
-			
-
 			&-item {
 				flex: 1;
 				text-align: center;
