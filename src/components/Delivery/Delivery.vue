@@ -120,9 +120,9 @@
 						￥{{good.product.price}}
 					</p>
 					<span class="buy">
-						<b @click="reduceCount(good)" :class="{ active: good.count>0}">-</b>
-						<var>{{good.count}}</var>
-						<b @click="addCount(good)" class="active">+</b>
+						<!-- <b @click="reduceCount(good)" :class="{ active: good.count>0}">-</b> -->
+						<var>X{{good.count}}</var>
+						<!-- <b @click="addCount(good)" class="active">+</b> -->
 					</span>
 				</div>
 			</div>
@@ -295,6 +295,12 @@ export default {
 					this.ticket = this.submitInfo.tickets[0]
 				}
 			});
+		},
+		activate(){
+			document.body.style.backgroundColor="#e6e6e6"
+		},
+		deactivate(){
+			document.body.style.backgroundColor=""
 		}
 	},
 	methods:{

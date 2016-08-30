@@ -1,8 +1,8 @@
 <template>
 	<div class="delivery">
 		<div class="delivery-tip">
-			<p class="delivery-tip-harry">
-				xxx库存紧张 请尽快支付
+			<p class="delivery-tip-harry" v-if="submitInfo.warn">
+				{{ submitInfo.warn }}
 			</p>
 			<!-- <div class="delivery-tip-place">
 				<p>
@@ -204,7 +204,7 @@ export default {
 			return this.submitInfo.freight;
 		},
 		ticket() {
-			return this.submitInfo.tickets[0].money;
+			return this.submitInfo.tickets && this.submitInfo.tickets[0] && this.submitInfo.tickets[0].money || 0;
 		},
 		isSingle() {
 			return this.$route.params.groupway == 1 ? true : false
@@ -322,6 +322,12 @@ export default {
 					//this.freight = 
 				}
 			});*/
+		},
+		activate(){
+			document.body.style.backgroundColor="#e6e6e6"
+		},
+		deactivate(){
+			document.body.style.backgroundColor=""
 		}
 	},
 	methods:{
