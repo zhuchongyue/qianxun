@@ -4,7 +4,7 @@
 			<p v-if="submitInfo.warn" class="delivery-tip-harry">
 				{{ submitInfo.warn }}
 			</p>
-			
+
 		</div>
 
 		<div class="delivery-addr">
@@ -18,12 +18,12 @@
 			</div>
 			<div v-if="buyWay == 2" class="delivery-addr-info">
 				<div class="delivery-addr-info-select">
-					
+
 					<div class="delivery-addr-info-select-item">
 						<div class="delivery-addr-info-select-item-hint">
 							<p>收货人</p>
 							<p>电话</p>
-							
+
 						</div>
 						<div class="delivery-addr-info-select-item-value">
 							<div>
@@ -37,7 +37,7 @@
 					<div class="delivery-addr-info-select-time">
 						发货时间 {{submitInfo.getTime}}
 					</div>
-					
+
 				</div>
 				<div class="delivery-addr-info-location">
 					<p>邮寄地址</p>
@@ -63,7 +63,7 @@
 					<div class="delivery-addr-new-item-hint">
 						<p>收货人</p>
 						<p>电话</p>
-						
+
 					</div>
 					<div class="delivery-addr-new-item-value">
 						<div>
@@ -147,7 +147,7 @@
 
 		<div class="delivery-oper">
 			<div class="delivery-oper-all">
-				
+
 				<div class="delivery-oper-all-word">
 					共<span>￥{{sumPrice}}</span>
 				</div>
@@ -225,7 +225,7 @@ export default {
 		freight() {
 			return this.buyWay == 2 ? this.submitInfo.freight : 0;
 		},
-		
+
 	},
 	route: {
 		data(){
@@ -302,7 +302,7 @@ export default {
 		  this.showCartMask = true;
 		  this.$broadcast('show-cart');
 		},
-		
+
 		addOrder(){
 
 			var goods = JSON.stringify(this.allGoods.map(value => {
@@ -322,7 +322,7 @@ export default {
 					buyerName: this.account.buyerName,
 					buyerMobile: this.account.buyerMobile,
 					groupbuyId: this.groupbuyid,
-					ticketId: this.ticket.ticketId,
+					ticketId: this.ticket&&this.ticket.ticketId,
 					payWay: 1,
 					goods
 				}
@@ -336,7 +336,7 @@ export default {
 					buyerName: this.account.buyerName,
 					buyerMobile: this.account.buyerMobile,
 					groupbuyId: this.groupbuyid,
-					ticketId: this.ticket.ticketId,
+					ticketId: this.ticket&&this.ticket.ticketId,
 					payWay: 1,
 					goods
 				}
@@ -366,7 +366,7 @@ export default {
 										orderId: config.orderId
 									}
 								})
-								
+
 							},
 							cancel : function(res){
 								alert('cancel')

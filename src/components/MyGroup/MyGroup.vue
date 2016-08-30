@@ -9,7 +9,7 @@
                         {{ group.title }}
                     </span>
                     <span class="count">
-                        X1
+                        X{{ group.num }}
                     </span>
                 </p>
                 <p class="detail">
