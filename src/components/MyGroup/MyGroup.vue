@@ -1,7 +1,7 @@
 <template>
     <div class="mygroup">
 
-        <div v-for="group in myGroup" class="mygroup-info">
+        <div v-if="myGroup && myGroup.length" v-for="group in myGroup" class="mygroup-info">
             <img :src="group.img" alt="">
             <div class="mygroup-info-item">
                 <p>
@@ -45,6 +45,7 @@
 
             </div>
         </div>
+        <null-ele v-else :word="nullWord"></null-ele>
 
 
     </div>
@@ -75,17 +76,21 @@
 
 import CartNavBar from '../Common/CartNavBar.vue';
 
+import NullEle from '../Common/NullEle.vue'
+
 export default {
     name: 'mygroup',
     data(){
         return {
             showMask: false,
             myGroup: [],
-            lackPerson: 0,
+            lacnullWordkPerson: 0,
+            nullWord: '您目前还没有团购信息',
         }
     },
     components: {
-        CartNavBar
+        CartNavBar,
+        NullEle
     },
     methods: {
         hideMask(){

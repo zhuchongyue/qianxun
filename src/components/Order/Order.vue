@@ -43,6 +43,7 @@
             </div>
         </div>
     </div>
+    <null-ele v-else :word="nullWord"></null-ele>
     <div @click="hideMask" v-if="showMask" class="order-mask">
         <div class="order-mask-con">
             戳这里邀请好友
@@ -50,14 +51,15 @@
         </div>
     </div>
     <cart-nav-bar :index="3"></cart-nav-bar>
-    
 </template>
 <style lang="less">
     @import "Order.less";
 </style>
 <script>
 
-import CartNavBar from '../Common/CartNavBar.vue';
+import CartNavBar from '../Common/CartNavBar.vue'
+
+import NullEle from '../Common/NullEle.vue'
 
 export default {
     name: 'order',
@@ -65,10 +67,12 @@ export default {
         return {
             orders: [],
             showMask: false,
+            nullWord: '你目前还没有订单',
         }
     },
     components: {
-        CartNavBar
+        CartNavBar,
+        NullEle,
     },
     methods: {
         hideMask(){

@@ -130,10 +130,16 @@ var plugin = {
 					require(['../components/Invite/Invite.vue'], resolve);
 				}
 			},
-			'ticket': {           //我的优惠券
+			'/ticket': {           //我的优惠券
 				name: 'ticket',
 				component (resolve) {
 					require(['../components/Ticket/Ticket.vue'], resolve);
+				}
+			},
+			'/test': {
+				name: 'test',
+				component (resolve) {
+					require(['../components/Test/Test.vue'], resolve);
 				}
 			}
 			

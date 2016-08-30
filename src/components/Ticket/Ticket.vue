@@ -26,9 +26,7 @@
         </div>
     </template>
     <template v-else>
-        <h3>
-            暂无可用优惠券
-        </h3>
+        <null-ele :word="nullWord"></null-ele>
     </template>
 
         
@@ -89,15 +87,19 @@
 <script>
 import CartNavBar from '../Common/CartNavBar.vue';
 
+import NullEle from '../Common/NullEle.vue'
+
 export default {
     name: 'ticket',
     data(){
         return {
-            tickets: []
+            tickets: [],
+            nullWord: '你目前还没有可用优惠券',
         }
     },
     components: {
-        CartNavBar
+        CartNavBar,
+        NullEle
     },
     route: {
         data() {
