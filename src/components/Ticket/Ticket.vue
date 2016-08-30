@@ -79,18 +79,25 @@
             </div>
         </div> -->
     </div>
-   
+
+    <cart-nav-bar :index="3"></cart-nav-bar>
+
 </template>
 <style lang="less">
     @import "Ticket.less";
 </style>
 <script>
+import CartNavBar from '../Common/CartNavBar.vue';
+
 export default {
     name: 'ticket',
     data(){
         return {
             tickets: []
         }
+    },
+    components: {
+        CartNavBar
     },
     route: {
         data() {

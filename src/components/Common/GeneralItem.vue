@@ -18,8 +18,8 @@
 			<p>
 				<span class="sum">已售{{ product.saleNum }}份</span>
 				<span class="buy">
-					<b class="reduce" :class="{ active: count > 0}" @click="reduceCount($event)">-</b>
-					<var>{{count}}</var>
+					<b class="reduce" v-show="count > 0" :class="{ active: count > 0}" @click="reduceCount($event)">-</b>
+					<var v-show="count > 0">{{count}}</var>
 					<b class="add active" @click="addCount($event)">+</b>
 				</span>
 			</p>

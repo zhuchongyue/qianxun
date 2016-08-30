@@ -27,17 +27,24 @@
     		</a>
     	</div>
     </div>
+    <cart-nav-bar :index="3"></cart-nav-bar>
 </template>
 <style lang="less">
     @import "Mine.less";
 </style>
 <script>
+
+import CartNavBar from '../Common/CartNavBar.vue';
+
 export default {
     name: 'mine',
     data() {
         return {
             account: {}
         }
+    },
+    components:{
+        CartNavBar
     },
     ready(){
         this.$http.jsonp("getMyAccount").then(response => {

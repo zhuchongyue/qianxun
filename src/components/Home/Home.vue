@@ -90,28 +90,30 @@
                 </template>
         	</div>
         </div>
-        <div class="home-oper">
-        	<div class="home-oper-item">
-        		<div class="img-wrap">
-        			<img class="img-home" src="./img/home_blue.png" alt="">
-        		</div>
-        		<p>首页</p>
-        	</div>
-        	<div class="home-oper-item home-oper-center" @click="showCart">
-        		<div class="img-wrap">
-        			<img src="./img/car_blue.png" alt="">
-        		</div>
-        		<p>购物车</p>
-        	</div>
-        	<div class="home-oper-item">
-                <a v-link="{ name: 'mine'}">
-            		<div class="img-wrap">
-            			<img class="img-user" src="./img/user_blue.png" alt="">
-            		</div>
-            		<p>我的</p>
-                </a>
-        	</div>
-        </div>
+       <!--  <div class="home-oper">
+           <div class="home-oper-item">
+               <div class="img-wrap">
+                   <img class="img-home" src="./img/home_blue.png" alt="">
+               </div>
+               <p>首页</p>
+           </div>
+           <div class="home-oper-item home-oper-center" @click="showCart">
+               <div v-if="allGoods.length>0" class="red-point"></div>
+               <div class="img-wrap">
+                   <img src="./img/car_blue.png" alt="">
+               </div>
+               <p>购物车</p>
+           </div>
+           <div class="home-oper-item">
+               <a v-link="{ name: 'mine'}">
+                   <div class="img-wrap">
+                       <img class="img-user" src="./img/user_blue.png" alt="">
+                   </div>
+                   <p>我的</p>
+               </a>
+           </div>
+       </div> -->
+       <cart-nav-bar :index="1"></cart-nav-bar>
         <div @click="goTop(0.2,16)" class="home-back">
             <img src="./img/top.png">
         </div>
@@ -135,9 +137,11 @@ import generalItem from '../Common/GeneralItem.vue'
 
 import cartMask from '../Common/CartMask.vue'
 
+import CartNavBar from '../Common/CartNavBar.vue';
+
 import { changeGroupbuyid, clearGoods } from '../../vuex/actions.js'
 
-import { groupbuyid } from '../../vuex/getters.js'
+import { groupbuyid, allGoods } from '../../vuex/getters.js'
 
 export default {
     name: 'home',
@@ -154,6 +158,7 @@ export default {
         },
         getters: {
             groupbuyid,
+            allGoods
         }
     },
     ready(){
@@ -195,6 +200,9 @@ export default {
     events: {
         'update-groupbuyid': function() {
             this.getRecommendInfoById(this.groupbuyid);
+        },
+        'pop-cart': function() {
+            this.$broadcast('show-cart');
         }
     },
     methods: {
@@ -252,7 +260,8 @@ export default {
         groupItem,
         generalItem,
         cartMask,
-        dateEle:DateEle
+        dateEle:DateEle,
+        CartNavBar,
     }
 }
 </script>

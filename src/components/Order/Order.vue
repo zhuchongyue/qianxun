@@ -49,11 +49,16 @@
             <img src="./img/sanjiao.png" alt="">
         </div>
     </div>
+    <cart-nav-bar :index="3"></cart-nav-bar>
+    
 </template>
 <style lang="less">
     @import "Order.less";
 </style>
 <script>
+
+import CartNavBar from '../Common/CartNavBar.vue';
+
 export default {
     name: 'order',
     data() {
@@ -61,6 +66,9 @@ export default {
             orders: [],
             showMask: false,
         }
+    },
+    components: {
+        CartNavBar
     },
     methods: {
         hideMask(){

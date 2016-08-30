@@ -65,11 +65,15 @@
             <img class="remind" src="../Common/img/tan.png" alt="">
         </div>
     </div>
+    <cart-nav-bar :index="3"></cart-nav-bar>
+
 </template>
 <style lang="less">
     @import "MyGroup.less";
 </style>
 <script>
+
+import CartNavBar from '../Common/CartNavBar.vue';
 
 export default {
     name: 'mygroup',
@@ -79,6 +83,9 @@ export default {
             myGroup: [],
             lackPerson: 0,
         }
+    },
+    components: {
+        CartNavBar
     },
     methods: {
         hideMask(){

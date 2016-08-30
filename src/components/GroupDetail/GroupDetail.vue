@@ -133,7 +133,7 @@
 					<p class="price">
 						￥{{ detail.groupPrice }}
 					</p>
-					3人团
+					{{ detail.groupPerson }}人团
 				</a>
 			</div>
 		</div>
@@ -187,9 +187,9 @@
 			singleAddOrder() {
 				this.setGroupGood(this.detail)
 				this.$router.go({
-					name: 'gdelivery',
+					name: 'gsdelivery',
 					params: {
-						groupway: 1
+						groupbuyid: this.groupGoodsId
 					}
 				})
 			},

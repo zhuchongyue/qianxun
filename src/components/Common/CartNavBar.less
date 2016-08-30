@@ -1,0 +1,59 @@
+
+@import "../common";
+.home-oper {
+		background-color: #1c1b1f;
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+		left: 0;
+		height: 90 * @px;
+		display: flex;
+		color: #fff;
+
+		font-size: 18 * @px;
+		justify-content: center;
+		align-items: center;
+
+		&-active{
+			color: rgb( 0, 173, 245 );
+		}
+
+		&-item {
+			flex: 1;
+			text-align: center;
+
+			.img-wrap {
+				height: 56 * @px;
+				line-height: 56 * @px;
+			}
+
+			.img-home {
+				position: relative;
+				top: 11 * @px;
+			}
+
+			img {
+				width: 52 * @px;
+			}
+
+			.img-user {
+				width: 44 * @px;
+			}
+		}
+
+		&-center {
+			flex: 1;
+			position: relative;
+
+			.red-point {
+				position: absolute;
+				left: 50%;
+				top: 3*@px;
+				border-radius: 50%;
+				background-color: red;
+				width: 10*@px;
+				height: 10*@px;
+			}
+		}
+
+	}

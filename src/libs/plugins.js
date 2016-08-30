@@ -64,7 +64,13 @@ var plugin = {
 					require(['../components/Delivery/Delivery.vue'], resolve);
 				}
 			},
-			'/gdelivery/:groupway': {   //团购支付页  groupway 1 单独团 2 拼团
+			'/gsdelivery/:groupgoodsid': {           //团购单独购买
+				name: 'gsdelivery',
+				component (resolve) {
+					require(['../components/GsDelivery/GsDelivery.vue'], resolve);
+				}
+			},
+			'/gdelivery/:groupway': {   //团购支付页  groupway 2 拼团
 				name: 'gdelivery',
 				component (resolve) {
 					require(['../components/GDelivery/GDelivery.vue'], resolve);

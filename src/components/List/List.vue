@@ -40,7 +40,7 @@
         </div> -->
         <div class="list-oper-empty-word">
           共<span class="sum-price">￥{{ sumPrice }}</span>
-          (满80包邮)
+          (满￥{{ config.limitFreight }}包邮)
         </div>
   			<div class="list-oper-empty-summary">
           <a v-link="{name: 'delivery'}">
@@ -67,7 +67,7 @@ import GroupItem from '../Common/GroupItem.vue'
 
 import cartMask from '../Common/CartMask.vue'
 
-import { groupbuyid, allGoods } from '../../vuex/getters.js'
+import { groupbuyid, allGoods, config } from '../../vuex/getters.js'
 
 
 export default {
@@ -75,7 +75,8 @@ export default {
     vuex: {
       getters: {
         allGoods,
-        groupbuyid
+        groupbuyid,
+        config
       }
     },
     methods: {
