@@ -425,14 +425,20 @@ export default {
 							signType : config.signType,
 							paySign : config.paySign,
 							success(res){
-								alert(JSON.stringify(res))
 
 								this.$router.go({
 									name: 'gsuccess'
 								})
 							},
 							cancel : function(res){
-								alert('cancel')
+								this.$router.go({
+									name: 'order'
+								})
+							},
+							fail: function(){
+								this.$router.go({
+									name: 'order'
+								})
 							}
 						})
 					})

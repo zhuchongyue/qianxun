@@ -413,7 +413,6 @@ export default {
 							signType : config.signType,
 							paySign : config.paySign,
 							success(res){
-								alert(JSON.stringify(res))
 								_this.$router.go({
 									name: 'success',
 									params: {
@@ -423,7 +422,14 @@ export default {
 
 							},
 							cancel : function(res){
-								alert('cancel')
+								_this.$router.go({
+									name: 'order'
+								})
+							},
+							fail: function(res) {
+								_this.$router.go({
+									name: 'order'
+								})
 							}
 						})
 					})
