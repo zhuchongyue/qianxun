@@ -23,14 +23,13 @@
 						<div class="delivery-addr-info-select-item-hint">
 							<p>收货人</p>
 							<p>电话</p>
-
 						</div>
 						<div class="delivery-addr-info-select-item-value">
 							<div>
-								<input type="text" v-model="account.buyerMobile">
+								<input type="text" v-model="account.buyerName">
 							</div>
 							<div>
-								<input type="text" v-model="account.buyerName">
+								<input type="text" v-model="account.buyerMobile">
 							</div>
 						</div>
 					</div>
@@ -52,9 +51,26 @@
 								</select>
 							</span>
 						</div>
-						<div class="delivery-addr-info-location-area">
+						<!-- <div class="delivery-addr-info-location-area">
 							朝阳区
-						</div>
+						</div> -->
+					</div>
+				</div>
+				<div class="delivery-addr-info-location">
+					<p>详细地址</p>
+					<div class="delivery-addr-info-location-wrap">
+						
+						<input type="text" v-model="detailAddress" name="" id="" placeholder="请输入您的详细地址">
+						<!-- <div class="delivery-addr-info-location-city">
+							北京市
+							<span class="right">
+								<select v-model="selectedAreaId" name="" id="">
+									<option v-for="area in areas" v-bind:value="area.id">
+										{{ area.name }}
+									</option>
+								</select>
+							</span>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -63,14 +79,13 @@
 					<div class="delivery-addr-new-item-hint">
 						<p>收货人</p>
 						<p>电话</p>
-
 					</div>
 					<div class="delivery-addr-new-item-value">
 						<div>
-							<input type="text" v-model="account.buyerMobile">
+							<input type="text" v-model="account.buyerName">
 						</div>
 						<div>
-							<input type="text" v-model="account.buyerName">
+							<input type="text" v-model="account.buyerMobile">
 						</div>
 					</div>
 				</div>
@@ -178,6 +193,8 @@ import { changeGroupbuyid, addGoods } from '../../vuex/actions.js'
 
 import cartMask from '../Common/CartMask.vue'
 
+const isMob = /^((\+?86)|(\(\+86\)))?(17[012356789][0-9]{8}|13[0123456789][0-9]{8}|15[012356789][0-9]{8}|18[02356789][0-9]{8}|147[0-9]{8}|1349[0-9]{7})$/
+
 export default {
 	name:'delivery',
 	data() {
@@ -192,6 +209,7 @@ export default {
 			account:{},
 			buyWay:1,
 			showCartMask: false,
+			detailAddress: ''
 		}
 	},
 	components: {
@@ -322,6 +340,33 @@ export default {
 			}))
 
 			var params = {}
+
+			//校验
+			if(this.account.buyerName == '' || this.account.buyerName.trim() == '') {
+				alert('请填写收货人姓名');
+				return;
+			}
+
+			if(this.account.buyerMobile == '' || this.account.buyerMobile.trim() == '') {
+				alert('请填写收货人联系电话');
+				return;
+			}
+
+			if(!isMob.test(this.account.buyerMobile)){
+				alert('收货人联系电话格式不对');
+				return;
+			}
+
+			if(this.buyWay == 2 && (this.detailAddress == '' || this.detailAddress.trim() == '')){
+				alert('请填写收货人的详细地址');
+				return;
+			}
+
+			if(this.detailAddress.length < 5){
+				alert('收货人的详细地址过短');
+				return;
+			}
+
 			//自提
 			if(this.buyWay == 1){
 				params = {
@@ -341,7 +386,7 @@ export default {
 					buyWay: this.buyWay,
 					cityId: 5,
 					areaId: 6,
-					address: '测试地址',
+					address: this.detailAddress,
 					buyerName: this.account.buyerName,
 					buyerMobile: this.account.buyerMobile,
 					groupbuyId: this.groupbuyid,

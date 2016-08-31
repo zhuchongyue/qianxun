@@ -189,7 +189,7 @@
 				this.$router.go({
 					name: 'gsdelivery',
 					params: {
-						groupbuyid: this.groupGoodsId
+						groupgoodsid: this.groupGoodsId
 					}
 				})
 			},
