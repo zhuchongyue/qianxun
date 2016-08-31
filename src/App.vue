@@ -25,13 +25,11 @@
 
 			if(!localStorage.getItem("userInfo")) {
 				if(document.location.search.indexOf("code=") == -1) {
-					
 
 					window.location = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8031d15a06d4a296&redirect_uri=${encodeURIComponent(window.location.href)}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`
 				}
 
 				if( document.location.search.indexOf("code=") > 0) {
-
 
 					this.$http.jsonp("getMyAccount",{
 						params: {
@@ -48,9 +46,17 @@
 							Cookie.set(Cookie.COOKIE_OPENID, response.data.respData.openid, { expires: 30, domain: 'www-test.qx-llt.com', path: '/'})
 						}
 					})
-
-				
 				}
+			}else{
+
+				var userInfo = JSON.parse(localStorage.getItem("userInfo"))
+
+				Cookie.set(Cookie.COOKIE_UID, userInfo.uid, Cookie.COOKIE_OPTION)
+				Cookie.set(Cookie.COOKIE_OPENID, userInfo.openid, Cookie.COOKIE_OPTION)
+
+				Cookie.set(Cookie.COOKIE_UID, userInfo.uid, { expires: 30, domain: 'www-test.qx-llt.com', path: '/'})
+				Cookie.set(Cookie.COOKIE_OPENID, userInfo.openid, { expires: 30, domain: 'www-test.qx-llt.com', path: '/'})
+
 			}
 
 			this.$http.jsonp("getConfig").then(response => {
