@@ -51,6 +51,7 @@
         </div>
     </div>
     <cart-nav-bar :index="3"></cart-nav-bar>
+    <cart-mask></cart-mask>
 </template>
 <style lang="less">
     @import "Order.less";
@@ -58,6 +59,8 @@
 <script>
 
 import CartNavBar from '../Common/CartNavBar.vue'
+
+import cartMask from '../Common/CartMask.vue'
 
 import NullEle from '../Common/NullEle.vue'
 
@@ -73,6 +76,12 @@ export default {
     components: {
         CartNavBar,
         NullEle,
+        cartMask,
+    },
+    events: {
+        'pop-cart': function() {
+            this.$broadcast('show-cart');
+        }
     },
     methods: {
         hideMask(){

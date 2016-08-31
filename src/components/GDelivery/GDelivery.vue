@@ -194,7 +194,7 @@ export default {
 
 			price += parseFloat(this.groupGood.price);
 
-			price+= this.submitInfo.freight;
+			price += this.submitInfo.freight;
 
 			price -= this.ticket;
 
@@ -331,51 +331,6 @@ export default {
 		}
 	},
 	methods:{
-		createOrder() {
-
-			var goods =  JSON.stringify([{"goodsId": 38, "number": 3},{"goodsId": 14,"number": 1}]);
-
-			this.$http.jsonp("addOrder", {
-				params: {
-					buyWay: 1,
-					buyerName: "朱崇跃",
-					buyerMobile: "18612782819",
-					groupbuyId: 1,
-					payWay: 1,
-					goods,
-					ticketId: 0,
-					address:"北京北京"
-				}
-			}).then( response => {
-				if(response.data.respCode == 0) {
-
-					var config = response.data.respData;
-					var _this = this;
-					wx.ready( () => {
-						wx.chooseWXPay({
-							appId : config.appId,
-							timestamp : config.timeStamp,
-							nonceStr : config.nonceStr,
-							package : config.packageSign,
-							signType : config.signType,
-							paySign : config.paySign,
-							success(res){
-								alert(JSON.stringify(res))
-								_this.router.go({
-									name: 'gsuccess',
-									params: {
-										orderId: config.orderId
-									}
-								})
-							},
-							cancel : function(res){
-								alert('cancel')
-							}
-						})
-					})
-				}
-			})
-		},
 		addOrder(){
 
 			var goods =  JSON.stringify([{ "goodsId": this.groupGood.goodsId, "number": 1 }]);

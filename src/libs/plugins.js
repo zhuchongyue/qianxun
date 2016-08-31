@@ -70,6 +70,12 @@ var plugin = {
 					require(['../components/GsDelivery/GsDelivery.vue'], resolve);
 				}
 			},
+			'/gndelivery/:groupgoodsid': {        //团购成员支付确认页
+				name: 'gndelivery',
+				component (resolve) {
+					require(['../components/GnDelivery/GnDelivery.vue'], resolve);
+				}
+			},
 			'/gdelivery/:groupway': {   //团购支付页  groupway 2 拼团
 				name: 'gdelivery',
 				component (resolve) {

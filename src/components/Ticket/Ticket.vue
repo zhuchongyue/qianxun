@@ -80,6 +80,9 @@
 
     <cart-nav-bar :index="3"></cart-nav-bar>
 
+    <cart-mask></cart-mask>
+
+
 </template>
 <style lang="less">
     @import "Ticket.less";
@@ -88,6 +91,9 @@
 import CartNavBar from '../Common/CartNavBar.vue';
 
 import NullEle from '../Common/NullEle.vue'
+
+import cartMask from '../Common/CartMask.vue'
+
 
 export default {
     name: 'ticket',
@@ -99,7 +105,13 @@ export default {
     },
     components: {
         CartNavBar,
-        NullEle
+        NullEle,
+        cartMask
+    },
+    events: {
+        'pop-cart': function() {
+            this.$broadcast('show-cart');
+        }
     },
     route: {
         data() {

@@ -27,6 +27,7 @@
     		</a>
     	</div>
     </div>
+    <cart-mask></cart-mask>
     <cart-nav-bar :index="3"></cart-nav-bar>
 </template>
 <style lang="less">
@@ -36,6 +37,8 @@
 
 import CartNavBar from '../Common/CartNavBar.vue';
 
+import cartMask from '../Common/CartMask.vue'
+
 export default {
     name: 'mine',
     data() {
@@ -44,7 +47,8 @@ export default {
         }
     },
     components:{
-        CartNavBar
+        CartNavBar,
+        cartMask
     },
     ready(){
         this.$http.jsonp("getMyAccount").then(response => {
@@ -52,6 +56,11 @@ export default {
                 this.account = response.data.respData
             }
         })
+    },
+    events: {
+        'pop-cart': function() {
+            this.$broadcast('show-cart');
+        }
     },
     route: {
     	data(){
